@@ -30,8 +30,11 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playWithAIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -58,14 +61,12 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.playWithAIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,6 +93,29 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.fileToolStripMenuItem.Text = "Game";
             // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetToolStripMenuItem.Text = "New";
+            // 
+            // playWithAIToolStripMenuItem
+            // 
+            this.playWithAIToolStripMenuItem.Name = "playWithAIToolStripMenuItem";
+            this.playWithAIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.playWithAIToolStripMenuItem.Text = "Play with AI";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -100,16 +124,10 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // label1
@@ -126,7 +144,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(202, 38);
+            this.label3.Location = new System.Drawing.Point(192, 38);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(118, 30);
             this.label3.TabIndex = 28;
@@ -164,7 +182,10 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(15, 145);
             this.button1.Name = "button1";
@@ -174,7 +195,10 @@
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackColor = System.Drawing.Color.Gainsboro;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(111, 145);
             this.button2.Name = "button2";
@@ -184,7 +208,10 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.BackColor = System.Drawing.Color.Gainsboro;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(207, 145);
             this.button3.Name = "button3";
@@ -194,7 +221,10 @@
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.Transparent;
+            this.button4.BackColor = System.Drawing.Color.Gainsboro;
+            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(303, 145);
             this.button4.Name = "button4";
@@ -204,7 +234,10 @@
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.Color.Transparent;
+            this.button5.BackColor = System.Drawing.Color.Gainsboro;
+            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.Location = new System.Drawing.Point(399, 145);
             this.button5.Name = "button5";
@@ -214,7 +247,10 @@
             // 
             // button6
             // 
-            this.button6.BackColor = System.Drawing.Color.Transparent;
+            this.button6.BackColor = System.Drawing.Color.Gainsboro;
+            this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.Location = new System.Drawing.Point(15, 241);
             this.button6.Name = "button6";
@@ -224,7 +260,10 @@
             // 
             // button7
             // 
-            this.button7.BackColor = System.Drawing.Color.Transparent;
+            this.button7.BackColor = System.Drawing.Color.Gainsboro;
+            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.Location = new System.Drawing.Point(111, 241);
             this.button7.Name = "button7";
@@ -234,7 +273,10 @@
             // 
             // button8
             // 
-            this.button8.BackColor = System.Drawing.Color.Transparent;
+            this.button8.BackColor = System.Drawing.Color.Gainsboro;
+            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button8.Location = new System.Drawing.Point(207, 241);
             this.button8.Name = "button8";
@@ -244,7 +286,10 @@
             // 
             // button9
             // 
-            this.button9.BackColor = System.Drawing.Color.Transparent;
+            this.button9.BackColor = System.Drawing.Color.Gainsboro;
+            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button9.Location = new System.Drawing.Point(303, 241);
             this.button9.Name = "button9";
@@ -254,7 +299,10 @@
             // 
             // button10
             // 
-            this.button10.BackColor = System.Drawing.Color.Transparent;
+            this.button10.BackColor = System.Drawing.Color.Gainsboro;
+            this.button10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button10.Location = new System.Drawing.Point(399, 241);
             this.button10.Name = "button10";
@@ -264,7 +312,10 @@
             // 
             // button11
             // 
-            this.button11.BackColor = System.Drawing.Color.Transparent;
+            this.button11.BackColor = System.Drawing.Color.Gainsboro;
+            this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button11.Location = new System.Drawing.Point(15, 337);
             this.button11.Name = "button11";
@@ -274,7 +325,10 @@
             // 
             // button12
             // 
-            this.button12.BackColor = System.Drawing.Color.Transparent;
+            this.button12.BackColor = System.Drawing.Color.Gainsboro;
+            this.button12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button12.Location = new System.Drawing.Point(111, 337);
             this.button12.Name = "button12";
@@ -284,7 +338,10 @@
             // 
             // button13
             // 
-            this.button13.BackColor = System.Drawing.Color.Transparent;
+            this.button13.BackColor = System.Drawing.Color.Gainsboro;
+            this.button13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button13.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button13.Location = new System.Drawing.Point(207, 337);
             this.button13.Name = "button13";
@@ -294,7 +351,10 @@
             // 
             // button14
             // 
-            this.button14.BackColor = System.Drawing.Color.Transparent;
+            this.button14.BackColor = System.Drawing.Color.Gainsboro;
+            this.button14.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button14.Location = new System.Drawing.Point(303, 337);
             this.button14.Name = "button14";
@@ -304,7 +364,10 @@
             // 
             // button15
             // 
-            this.button15.BackColor = System.Drawing.Color.Transparent;
+            this.button15.BackColor = System.Drawing.Color.Gainsboro;
+            this.button15.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button15.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button15.Location = new System.Drawing.Point(399, 337);
             this.button15.Name = "button15";
@@ -314,7 +377,10 @@
             // 
             // button16
             // 
-            this.button16.BackColor = System.Drawing.Color.Transparent;
+            this.button16.BackColor = System.Drawing.Color.Gainsboro;
+            this.button16.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button16.Location = new System.Drawing.Point(15, 433);
             this.button16.Name = "button16";
@@ -324,7 +390,10 @@
             // 
             // button17
             // 
-            this.button17.BackColor = System.Drawing.Color.Transparent;
+            this.button17.BackColor = System.Drawing.Color.Gainsboro;
+            this.button17.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button17.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button17.Location = new System.Drawing.Point(111, 433);
             this.button17.Name = "button17";
@@ -334,7 +403,10 @@
             // 
             // button18
             // 
-            this.button18.BackColor = System.Drawing.Color.Transparent;
+            this.button18.BackColor = System.Drawing.Color.Gainsboro;
+            this.button18.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button18.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button18.Location = new System.Drawing.Point(207, 433);
             this.button18.Name = "button18";
@@ -344,7 +416,10 @@
             // 
             // button19
             // 
-            this.button19.BackColor = System.Drawing.Color.Transparent;
+            this.button19.BackColor = System.Drawing.Color.Gainsboro;
+            this.button19.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button19.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button19.Location = new System.Drawing.Point(303, 433);
             this.button19.Name = "button19";
@@ -354,7 +429,10 @@
             // 
             // button20
             // 
-            this.button20.BackColor = System.Drawing.Color.Transparent;
+            this.button20.BackColor = System.Drawing.Color.Gainsboro;
+            this.button20.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button20.Location = new System.Drawing.Point(399, 433);
             this.button20.Name = "button20";
@@ -362,26 +440,12 @@
             this.button20.TabIndex = 51;
             this.button20.UseVisualStyleBackColor = false;
             // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resetToolStripMenuItem.Text = "Reset";
-            // 
-            // playWithAIToolStripMenuItem
-            // 
-            this.playWithAIToolStripMenuItem.Name = "playWithAIToolStripMenuItem";
-            this.playWithAIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.playWithAIToolStripMenuItem.Text = "Play with AI";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
             // button21
             // 
-            this.button21.BackColor = System.Drawing.Color.Transparent;
+            this.button21.BackColor = System.Drawing.Color.Gainsboro;
+            this.button21.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button21.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button21.Location = new System.Drawing.Point(15, 529);
             this.button21.Name = "button21";
@@ -391,7 +455,10 @@
             // 
             // button22
             // 
-            this.button22.BackColor = System.Drawing.Color.Transparent;
+            this.button22.BackColor = System.Drawing.Color.Gainsboro;
+            this.button22.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button22.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button22.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button22.Location = new System.Drawing.Point(111, 529);
             this.button22.Name = "button22";
@@ -401,7 +468,10 @@
             // 
             // button23
             // 
-            this.button23.BackColor = System.Drawing.Color.Transparent;
+            this.button23.BackColor = System.Drawing.Color.Gainsboro;
+            this.button23.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button23.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button23.Location = new System.Drawing.Point(207, 529);
             this.button23.Name = "button23";
@@ -411,7 +481,10 @@
             // 
             // button24
             // 
-            this.button24.BackColor = System.Drawing.Color.Transparent;
+            this.button24.BackColor = System.Drawing.Color.Gainsboro;
+            this.button24.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button24.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button24.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button24.Location = new System.Drawing.Point(303, 529);
             this.button24.Name = "button24";
@@ -421,7 +494,10 @@
             // 
             // button25
             // 
-            this.button25.BackColor = System.Drawing.Color.Transparent;
+            this.button25.BackColor = System.Drawing.Color.Gainsboro;
+            this.button25.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button25.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button25.Location = new System.Drawing.Point(399, 529);
             this.button25.Name = "button25";
@@ -429,12 +505,25 @@
             this.button25.TabIndex = 56;
             this.button25.UseVisualStyleBackColor = false;
             // 
+            // startButton
+            // 
+            this.startButton.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.startButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.startButton.Location = new System.Drawing.Point(165, 80);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(169, 40);
+            this.startButton.TabIndex = 57;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(504, 638);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.button25);
             this.Controls.Add(this.button24);
             this.Controls.Add(this.button23);
@@ -518,6 +607,7 @@
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button startButton;
     }
 }
 

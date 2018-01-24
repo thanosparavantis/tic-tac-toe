@@ -26,7 +26,34 @@ namespace Tic_Tac_Toe
             button.ForeColor = color;
             button.Text = mark;
             moves[x, y] = true;
-            return false;
+            return IsWinMove(x, y);
+        }
+
+        private bool IsWinMove(int x, int y)
+        {
+            bool wonX = true;
+
+            for (int j = 0; j < 5; j++)
+            {
+                if (! moves[x, j])
+                {
+                    wonX = false;
+                    break;
+                }
+            }
+
+            bool wonY = true;
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (! moves[i, y])
+                {
+                    wonY = false;
+                    break;
+                }
+            }
+
+            return wonX || wonY;
         }
     }
 }

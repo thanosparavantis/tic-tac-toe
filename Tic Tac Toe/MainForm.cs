@@ -44,7 +44,20 @@ namespace Tic_Tac_Toe
         {
             // Add a new event handler for the Click event of all tic tac toe buttons.
             foreach (Button button in buttons)
+            {
+                button.Enabled = false;
                 button.Click += new EventHandler(this.HandleMoves);
+            }
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            foreach (Button button in buttons)
+            {
+                button.Enabled = true;
+            }
+
+            startButton.Visible = false;
         }
 
         private void HandleMoves(object sender, EventArgs e)
@@ -56,15 +69,18 @@ namespace Tic_Tac_Toe
 
             if (button.Text.Length == 0)
             {
-                turn.MakeMove(button, x, y);
+                bool won = turn.MakeMove(button, x, y);
 
-                if (turn.Equals(player1))
+                if (won)
                 {
-                    turn = player2;
+                    MessageBox.Show("WINNER!");
                 }
                 else
                 {
-                    turn = player1;
+                    if (turn.Equals(player1))
+                        turn = player2;
+                    else
+                        turn = player1;
                 }
             }
         }
