@@ -10,15 +10,24 @@ namespace Tic_Tac_Toe
 {
     class Player
     {
+        private string name;
         private string mark;
         private Color color;
+        private Label nameLabel, scoreLabel;
         private bool[,] moves;
+        private int score;
 
-        public Player(string mark, Color color)
+        public Player(string name, string mark, Color color, Label nameLabel, Label scoreLabel)
         {
+            this.name = name;
             this.mark = mark;
             this.color = color;
+            this.nameLabel = nameLabel;
+            this.scoreLabel = scoreLabel;
+
             moves = new bool[5, 5];
+            nameLabel.Text = name;
+            scoreLabel.Text = score.ToString();
         }
 
         public bool MakeMove(Button button, int x, int y)
@@ -54,6 +63,22 @@ namespace Tic_Tac_Toe
             }
 
             return wonX || wonY;
+        }
+
+        public void AddWin()
+        {
+            score++;
+            scoreLabel.Text = score.ToString();
+        }
+
+        public void ResetMoves()
+        {
+            moves = new bool[5, 5];
+        }
+
+        public override string ToString()
+        {
+            return name;
         }
     }
 }

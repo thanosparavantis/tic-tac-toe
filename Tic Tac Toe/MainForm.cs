@@ -33,8 +33,8 @@ namespace Tic_Tac_Toe
             };
 
             // Create two new player objects.
-            player1 = new Player("X", Color.Blue);
-            player2 = new Player("O", Color.Red);
+            player1 = new Player("Player 1", "X", Color.Blue, player1Label, player1ScoreLabel);
+            player2 = new Player("Player 2", "O", Color.Red, player2Label, player2ScoreLabel);
 
             // Who plays first when the game starts.
             turn = player1;
@@ -50,7 +50,7 @@ namespace Tic_Tac_Toe
             }
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        private void StartGame()
         {
             foreach (Button button in buttons)
             {
@@ -58,6 +58,36 @@ namespace Tic_Tac_Toe
             }
 
             startButton.Visible = false;
+        }
+
+        private void ResetGame()
+        {
+            player1.ResetMoves();
+            player2.ResetMoves();
+
+            turn = player1;
+
+            foreach (Button button in buttons)
+            {
+                button.Text = "";
+                button.Enabled = false;
+            }
+
+            startButton.Visible = true;
+            startButton.Focus();
+        }
+
+        private void EndGame()
+        {
+            MessageBox.Show(turn.ToString() + " won the game!");
+
+            turn.AddWin();
+            ResetGame();
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            StartGame();
         }
 
         private void HandleMoves(object sender, EventArgs e)
@@ -73,7 +103,7 @@ namespace Tic_Tac_Toe
 
                 if (won)
                 {
-                    MessageBox.Show("WINNER!");
+                    EndGame();
                 }
                 else
                 {

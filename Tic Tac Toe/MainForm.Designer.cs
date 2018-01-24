@@ -36,11 +36,11 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.player1Label = new System.Windows.Forms.Label();
+            this.headerLabel = new System.Windows.Forms.Label();
+            this.player2Label = new System.Windows.Forms.Label();
+            this.player1ScoreLabel = new System.Windows.Forms.Label();
+            this.player2ScoreLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -130,55 +130,55 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // label1
+            // player1Label
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.label1.Location = new System.Drawing.Point(26, 70);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 25);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Player 1";
+            this.player1Label.AutoSize = true;
+            this.player1Label.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.player1Label.Location = new System.Drawing.Point(26, 70);
+            this.player1Label.Name = "player1Label";
+            this.player1Label.Size = new System.Drawing.Size(79, 25);
+            this.player1Label.TabIndex = 26;
+            this.player1Label.Text = "Player 1";
             // 
-            // label3
+            // headerLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(192, 38);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 30);
-            this.label3.TabIndex = 28;
-            this.label3.Text = "Tic Tac Toe";
+            this.headerLabel.AutoSize = true;
+            this.headerLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headerLabel.Location = new System.Drawing.Point(192, 38);
+            this.headerLabel.Name = "headerLabel";
+            this.headerLabel.Size = new System.Drawing.Size(118, 30);
+            this.headerLabel.TabIndex = 28;
+            this.headerLabel.Text = "Tic Tac Toe";
             // 
-            // label2
+            // player2Label
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(410, 70);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 25);
-            this.label2.TabIndex = 29;
-            this.label2.Text = "Player 2";
+            this.player2Label.AutoSize = true;
+            this.player2Label.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.player2Label.Location = new System.Drawing.Point(410, 70);
+            this.player2Label.Name = "player2Label";
+            this.player2Label.Size = new System.Drawing.Size(79, 25);
+            this.player2Label.TabIndex = 29;
+            this.player2Label.Text = "Player 2";
             // 
-            // label4
+            // player1ScoreLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(46, 104);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 25);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "0";
+            this.player1ScoreLabel.AutoSize = true;
+            this.player1ScoreLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.player1ScoreLabel.Location = new System.Drawing.Point(46, 104);
+            this.player1ScoreLabel.Name = "player1ScoreLabel";
+            this.player1ScoreLabel.Size = new System.Drawing.Size(23, 25);
+            this.player1ScoreLabel.TabIndex = 30;
+            this.player1ScoreLabel.Text = "0";
             // 
-            // label5
+            // player2ScoreLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(437, 104);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(23, 25);
-            this.label5.TabIndex = 31;
-            this.label5.Text = "0";
+            this.player2ScoreLabel.AutoSize = true;
+            this.player2ScoreLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.player2ScoreLabel.Location = new System.Drawing.Point(437, 104);
+            this.player2ScoreLabel.Name = "player2ScoreLabel";
+            this.player2ScoreLabel.Size = new System.Drawing.Size(23, 25);
+            this.player2ScoreLabel.TabIndex = 31;
+            this.player2ScoreLabel.Text = "0";
             // 
             // button1
             // 
@@ -549,11 +549,11 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.player2ScoreLabel);
+            this.Controls.Add(this.player1ScoreLabel);
+            this.Controls.Add(this.player2Label);
+            this.Controls.Add(this.headerLabel);
+            this.Controls.Add(this.player1Label);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -574,11 +574,11 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label player1Label;
+        private System.Windows.Forms.Label headerLabel;
+        private System.Windows.Forms.Label player2Label;
+        private System.Windows.Forms.Label player1ScoreLabel;
+        private System.Windows.Forms.Label player2ScoreLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
