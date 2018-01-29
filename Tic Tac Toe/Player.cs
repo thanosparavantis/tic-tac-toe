@@ -34,37 +34,55 @@ namespace Tic_Tac_Toe
         {
             button.ForeColor = color;
             button.Text = mark;
+
             moves[x, y] = true;
-            return IsWinMove(x, y);
+            return CheckHorizontal(x) || CheckVertical(y) || CheckDiagLeft() || CheckDiagRight();
         }
 
-        private bool IsWinMove(int x, int y)
+        private bool CheckHorizontal(int x)
         {
-            bool wonX = true;
-
-            for (int j = 0; j < 5; j++)
+            for (int i = 0; i < MainForm.Y; i++)
             {
-                if (! moves[x, j])
-                {
-                    wonX = false;
-                    break;
-                }
+                if (!moves[x, i])
+                    return false;
             }
 
-            bool wonY = true;
-
-            for (int i = 0; i < 5; i++)
-            {
-                if (! moves[i, y])
-                {
-                    wonY = false;
-                    break;
-                }
-            }
-
-            return wonX || wonY;
+            return true;
         }
 
+        private bool CheckVertical(int y)
+        {
+            for (int i = 0; i < MainForm.X; i++)
+            {
+                if (!moves[i, y])
+                    return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckDiagLeft()
+        {
+            for (int i = 0; i < MainForm.X; i++)
+            {
+                if (!moves[i, i])
+                    return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckDiagRight()
+        {
+            for (int i = 0; i < MainForm.X; i++)
+            {
+                if (!moves[i, (MainForm.X - 1) - i])
+                    return false;
+            }
+
+            return true;
+        }
+        
         public void AddWin()
         {
             score++;

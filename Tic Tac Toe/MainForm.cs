@@ -20,11 +20,14 @@ namespace Tic_Tac_Toe
         // The current player's turn.
         private Player turn;
 
+        public const int X = 5;
+        public const int Y = 5;
+
         public MainForm()
         {
             InitializeComponent();
             
-            buttons = new Button[5, 5] {
+            buttons = new Button[X, Y] {
                 { button1, button2, button3, button4, button5 },
                 { button6, button7, button8, button9, button10 },
                 { button11, button12, button13, button14, button15 },
