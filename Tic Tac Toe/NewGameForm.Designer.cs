@@ -65,7 +65,7 @@
             this.labelPlayer1.Location = new System.Drawing.Point(67, 125);
             this.labelPlayer1.Name = "labelPlayer1";
             this.labelPlayer1.Size = new System.Drawing.Size(47, 21);
-            this.labelPlayer1.TabIndex = 3;
+            this.labelPlayer1.TabIndex = 2;
             this.labelPlayer1.Text = "Label";
             // 
             // newGameButton
@@ -74,7 +74,7 @@
             this.newGameButton.Location = new System.Drawing.Point(12, 303);
             this.newGameButton.Name = "newGameButton";
             this.newGameButton.Size = new System.Drawing.Size(360, 46);
-            this.newGameButton.TabIndex = 4;
+            this.newGameButton.TabIndex = 9;
             this.newGameButton.Text = "Start new game";
             this.newGameButton.UseVisualStyleBackColor = true;
             this.newGameButton.Click += new System.EventHandler(this.newGameButton_Click);
@@ -86,7 +86,7 @@
             this.labelNamePlayer2.Location = new System.Drawing.Point(261, 20);
             this.labelNamePlayer2.Name = "labelNamePlayer2";
             this.labelNamePlayer2.Size = new System.Drawing.Size(66, 21);
-            this.labelNamePlayer2.TabIndex = 5;
+            this.labelNamePlayer2.TabIndex = 4;
             this.labelNamePlayer2.Text = "Player 2";
             // 
             // namePlayer2
@@ -95,7 +95,7 @@
             this.namePlayer2.Location = new System.Drawing.Point(212, 53);
             this.namePlayer2.Name = "namePlayer2";
             this.namePlayer2.Size = new System.Drawing.Size(160, 29);
-            this.namePlayer2.TabIndex = 6;
+            this.namePlayer2.TabIndex = 5;
             // 
             // computerCheckbox
             // 
@@ -104,7 +104,7 @@
             this.computerCheckbox.Location = new System.Drawing.Point(232, 247);
             this.computerCheckbox.Name = "computerCheckbox";
             this.computerCheckbox.Size = new System.Drawing.Size(131, 23);
-            this.computerCheckbox.TabIndex = 9;
+            this.computerCheckbox.TabIndex = 8;
             this.computerCheckbox.Text = "Computer Player";
             this.computerCheckbox.UseVisualStyleBackColor = true;
             // 
@@ -115,7 +115,7 @@
             this.buttonMarkPlayer2.Location = new System.Drawing.Point(250, 151);
             this.buttonMarkPlayer2.Name = "buttonMarkPlayer2";
             this.buttonMarkPlayer2.Size = new System.Drawing.Size(90, 90);
-            this.buttonMarkPlayer2.TabIndex = 10;
+            this.buttonMarkPlayer2.TabIndex = 7;
             this.buttonMarkPlayer2.UseVisualStyleBackColor = true;
             this.buttonMarkPlayer2.Click += new System.EventHandler(this.buttonMarkPlayer2_Click);
             // 
@@ -126,7 +126,7 @@
             this.labelPlayer2.Location = new System.Drawing.Point(270, 125);
             this.labelPlayer2.Name = "labelPlayer2";
             this.labelPlayer2.Size = new System.Drawing.Size(47, 21);
-            this.labelPlayer2.TabIndex = 11;
+            this.labelPlayer2.TabIndex = 6;
             this.labelPlayer2.Text = "Label";
             // 
             // buttonMarkPlayer1
@@ -136,12 +136,13 @@
             this.buttonMarkPlayer1.Location = new System.Drawing.Point(48, 151);
             this.buttonMarkPlayer1.Name = "buttonMarkPlayer1";
             this.buttonMarkPlayer1.Size = new System.Drawing.Size(90, 90);
-            this.buttonMarkPlayer1.TabIndex = 12;
+            this.buttonMarkPlayer1.TabIndex = 3;
             this.buttonMarkPlayer1.UseVisualStyleBackColor = true;
             this.buttonMarkPlayer1.Click += new System.EventHandler(this.buttonMarkPlayer1_Click);
             // 
             // NewGameForm
             // 
+            this.AcceptButton = this.newGameButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 361);
@@ -157,7 +158,9 @@
             this.Controls.Add(this.computerCheckbox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(400, 400);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "NewGameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New Game";

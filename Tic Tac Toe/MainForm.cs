@@ -12,6 +12,9 @@ namespace Tic_Tac_Toe
 {
     public partial class MainForm : Form
     {
+        public const int X = 5;
+        public const int Y = 5;
+
         private Button[,] buttons;
 
         // The two player references of the game.
@@ -22,8 +25,7 @@ namespace Tic_Tac_Toe
 
         private Random random;
 
-        public const int X = 5;
-        public const int Y = 5;
+        private NewGameForm newGameForm;
 
         public static int MatchMoves { get; set; }
 
@@ -56,8 +58,7 @@ namespace Tic_Tac_Toe
         {
             if (player1 == null || player2 == null)
             {
-                NewGameForm newGameForm = new NewGameForm(CreateGame);
-                newGameForm.Show();
+                OpenNewGameForm();
             }
             else
             {
@@ -67,8 +68,16 @@ namespace Tic_Tac_Toe
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewGameForm newGameForm = new NewGameForm(CreateGame);
-            newGameForm.Show();
+            OpenNewGameForm();
+        }
+
+        private void OpenNewGameForm()
+        {
+            if (newGameForm == null || newGameForm.IsDisposed)
+            {
+                newGameForm = new NewGameForm(CreateGame);
+                newGameForm.Show();
+            }
         }
 
         private void CreateGame(Player player1, Player player2)
