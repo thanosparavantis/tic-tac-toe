@@ -71,9 +71,10 @@ namespace Tic_Tac_Toe
             string name2 = namePlayer2.Text == "" ? "Player 2" : namePlayer2.Text;
             string mark2 = buttonMarkPlayer2.Text;
             Color color2 = buttonMarkPlayer2.ForeColor;
+            bool isComputer = computerCheckbox.Checked;
 
             Player player1 = new Player(name1, mark1, color1);
-            Player player2 = new Player(name2, mark2, color2);
+            Player player2 = new Player(name2, mark2, color2, isComputer);
 
             handler(player1, player2);
 

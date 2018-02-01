@@ -18,13 +18,16 @@ namespace Tic_Tac_Toe
 
         public int Score { get; private set; }
 
+        public bool IsComputer { get; private set; }
+
         private bool[,] moves;
 
-        public Player(string name, string mark, Color color)
+        public Player(string name, string mark, Color color, bool isComputer = false)
         {
             Νame = name;
             Μark = mark;
             Color = color;
+            IsComputer = isComputer;
 
             moves = new bool[5, 5];
         }

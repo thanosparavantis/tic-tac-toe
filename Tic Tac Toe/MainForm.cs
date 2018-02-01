@@ -68,6 +68,7 @@ namespace Tic_Tac_Toe
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            EndGameDraw();
             OpenNewGameForm();
         }
 
@@ -96,7 +97,7 @@ namespace Tic_Tac_Toe
 
         private void StartGame()
         {
-            turn = random.Next(0, 1) == 0 ? player1 : player2;
+            RandomTurn();
 
             foreach (Button button in buttons)
             {
@@ -113,7 +114,7 @@ namespace Tic_Tac_Toe
             player1.ResetMoves();
             player2.ResetMoves();
 
-            turn = player1;
+            ResetNameLabels();
 
             foreach (Button button in buttons)
             {
@@ -145,12 +146,54 @@ namespace Tic_Tac_Toe
             ResetGame();
         }
 
+        private void RandomTurn()
+        {
+            if (random.Next(0, 1) == 0)
+                SetTurnPlayer1();
+            else
+                SetTurnPlayer2();
+        }
+
         private void SwitchTurns()
         {
             if (turn.Equals(player1))
-                turn = player2;
+                SetTurnPlayer2();
             else
-                turn = player1;
+                SetTurnPlayer1();
+        }
+
+        private void SetTurnPlayer1()
+        {
+            turn = player1;
+            labelNamePlayer1.Font = new Font(labelNamePlayer1.Font, FontStyle.Bold);
+            labelNamePlayer1.ForeColor = turn.Color;
+            ResetNameLabel2();
+        }
+
+        private void SetTurnPlayer2()
+        {
+            turn = player2;
+            labelNamePlayer2.Font = new Font(labelNamePlayer2.Font, FontStyle.Bold);
+            labelNamePlayer2.ForeColor = turn.Color;
+            ResetNameLabel1();
+        }
+
+        private void ResetNameLabel1()
+        {
+            labelNamePlayer1.Font = new Font(labelNamePlayer1.Font, FontStyle.Regular);
+            labelNamePlayer1.ForeColor = Color.Black;
+        }
+
+        private void ResetNameLabel2()
+        {
+            labelNamePlayer2.Font = new Font(labelNamePlayer2.Font, FontStyle.Regular);
+            labelNamePlayer2.ForeColor = Color.Black;
+        }
+
+        private void ResetNameLabels()
+        {
+            ResetNameLabel1();
+            ResetNameLabel2();
         }
 
         private void HandleMoves(object sender, EventArgs e)
