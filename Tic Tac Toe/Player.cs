@@ -8,32 +8,31 @@ using System.Windows.Forms;
 
 namespace Tic_Tac_Toe
 {
-    class Player
+    public class Player
     {
-        private string name;
-        private string mark;
-        private Color color;
-        private Label nameLabel, scoreLabel;
-        private bool[,] moves;
-        private int score;
+        public string Νame { get; private set; }
 
-        public Player(string name, string mark, Color color, Label nameLabel, Label scoreLabel)
+        public string Μark { get; private set; }
+
+        public Color Color { get; private set; }
+
+        public int Score { get; private set; }
+
+        private bool[,] moves;
+
+        public Player(string name, string mark, Color color)
         {
-            this.name = name;
-            this.mark = mark;
-            this.color = color;
-            this.nameLabel = nameLabel;
-            this.scoreLabel = scoreLabel;
+            Νame = name;
+            Μark = mark;
+            Color = color;
 
             moves = new bool[5, 5];
-            nameLabel.Text = name;
-            scoreLabel.Text = score.ToString();
         }
-
+        
         public MoveState MakeMove(Button button, int x, int y)
         {
-            button.ForeColor = color;
-            button.Text = mark;
+            button.ForeColor = Color;
+            button.Text = Μark;
 
             moves[x, y] = true;
             MainForm.MatchMoves++;
@@ -107,8 +106,7 @@ namespace Tic_Tac_Toe
         
         public void AddWin()
         {
-            score++;
-            scoreLabel.Text = score.ToString();
+            Score++;
         }
 
         public void ResetMoves()
@@ -118,7 +116,7 @@ namespace Tic_Tac_Toe
 
         public override string ToString()
         {
-            return name;
+            return Νame;
         }
     }
 }

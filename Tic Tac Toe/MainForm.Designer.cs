@@ -30,17 +30,16 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.playWithAIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.player1Label = new System.Windows.Forms.Label();
+            this.labelNamePlayer1 = new System.Windows.Forms.Label();
             this.headerLabel = new System.Windows.Forms.Label();
-            this.player2Label = new System.Windows.Forms.Label();
-            this.player1ScoreLabel = new System.Windows.Forms.Label();
-            this.player2ScoreLabel = new System.Windows.Forms.Label();
+            this.labelNamePlayer2 = new System.Windows.Forms.Label();
+            this.labelScorePlayer1 = new System.Windows.Forms.Label();
+            this.labelScorePlayer2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -66,7 +65,7 @@
             this.button23 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
-            this.startButton = new System.Windows.Forms.Button();
+            this.newGameButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,25 +84,19 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resetToolStripMenuItem,
-            this.playWithAIToolStripMenuItem,
+            this.newToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.fileToolStripMenuItem.Text = "Game";
             // 
-            // resetToolStripMenuItem
+            // newToolStripMenuItem
             // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resetToolStripMenuItem.Text = "New";
-            // 
-            // playWithAIToolStripMenuItem
-            // 
-            this.playWithAIToolStripMenuItem.Name = "playWithAIToolStripMenuItem";
-            this.playWithAIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.playWithAIToolStripMenuItem.Text = "Play with AI";
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Text = "New...";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -115,6 +108,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -130,15 +124,15 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // player1Label
+            // labelNamePlayer1
             // 
-            this.player1Label.AutoSize = true;
-            this.player1Label.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.player1Label.Location = new System.Drawing.Point(26, 70);
-            this.player1Label.Name = "player1Label";
-            this.player1Label.Size = new System.Drawing.Size(79, 25);
-            this.player1Label.TabIndex = 26;
-            this.player1Label.Text = "Player 1";
+            this.labelNamePlayer1.AutoSize = true;
+            this.labelNamePlayer1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.labelNamePlayer1.Location = new System.Drawing.Point(26, 70);
+            this.labelNamePlayer1.Name = "labelNamePlayer1";
+            this.labelNamePlayer1.Size = new System.Drawing.Size(79, 25);
+            this.labelNamePlayer1.TabIndex = 26;
+            this.labelNamePlayer1.Text = "Player 1";
             // 
             // headerLabel
             // 
@@ -150,35 +144,35 @@
             this.headerLabel.TabIndex = 28;
             this.headerLabel.Text = "Tic Tac Toe";
             // 
-            // player2Label
+            // labelNamePlayer2
             // 
-            this.player2Label.AutoSize = true;
-            this.player2Label.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.player2Label.Location = new System.Drawing.Point(410, 70);
-            this.player2Label.Name = "player2Label";
-            this.player2Label.Size = new System.Drawing.Size(79, 25);
-            this.player2Label.TabIndex = 29;
-            this.player2Label.Text = "Player 2";
+            this.labelNamePlayer2.AutoSize = true;
+            this.labelNamePlayer2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNamePlayer2.Location = new System.Drawing.Point(410, 70);
+            this.labelNamePlayer2.Name = "labelNamePlayer2";
+            this.labelNamePlayer2.Size = new System.Drawing.Size(79, 25);
+            this.labelNamePlayer2.TabIndex = 29;
+            this.labelNamePlayer2.Text = "Player 2";
             // 
-            // player1ScoreLabel
+            // labelScorePlayer1
             // 
-            this.player1ScoreLabel.AutoSize = true;
-            this.player1ScoreLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.player1ScoreLabel.Location = new System.Drawing.Point(46, 104);
-            this.player1ScoreLabel.Name = "player1ScoreLabel";
-            this.player1ScoreLabel.Size = new System.Drawing.Size(23, 25);
-            this.player1ScoreLabel.TabIndex = 30;
-            this.player1ScoreLabel.Text = "0";
+            this.labelScorePlayer1.AutoSize = true;
+            this.labelScorePlayer1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.labelScorePlayer1.Location = new System.Drawing.Point(46, 104);
+            this.labelScorePlayer1.Name = "labelScorePlayer1";
+            this.labelScorePlayer1.Size = new System.Drawing.Size(23, 25);
+            this.labelScorePlayer1.TabIndex = 30;
+            this.labelScorePlayer1.Text = "0";
             // 
-            // player2ScoreLabel
+            // labelScorePlayer2
             // 
-            this.player2ScoreLabel.AutoSize = true;
-            this.player2ScoreLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.player2ScoreLabel.Location = new System.Drawing.Point(437, 104);
-            this.player2ScoreLabel.Name = "player2ScoreLabel";
-            this.player2ScoreLabel.Size = new System.Drawing.Size(23, 25);
-            this.player2ScoreLabel.TabIndex = 31;
-            this.player2ScoreLabel.Text = "0";
+            this.labelScorePlayer2.AutoSize = true;
+            this.labelScorePlayer2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.labelScorePlayer2.Location = new System.Drawing.Point(437, 104);
+            this.labelScorePlayer2.Name = "labelScorePlayer2";
+            this.labelScorePlayer2.Size = new System.Drawing.Size(23, 25);
+            this.labelScorePlayer2.TabIndex = 31;
+            this.labelScorePlayer2.Text = "0";
             // 
             // button1
             // 
@@ -505,17 +499,17 @@
             this.button25.TabIndex = 56;
             this.button25.UseVisualStyleBackColor = false;
             // 
-            // startButton
+            // newGameButton
             // 
-            this.startButton.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.startButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.startButton.Location = new System.Drawing.Point(165, 80);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(169, 40);
-            this.startButton.TabIndex = 57;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            this.newGameButton.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.newGameButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.newGameButton.Location = new System.Drawing.Point(165, 80);
+            this.newGameButton.Name = "newGameButton";
+            this.newGameButton.Size = new System.Drawing.Size(169, 40);
+            this.newGameButton.TabIndex = 57;
+            this.newGameButton.Text = "New Game";
+            this.newGameButton.UseVisualStyleBackColor = true;
+            this.newGameButton.Click += new System.EventHandler(this.newGameButton_Click);
             // 
             // MainForm
             // 
@@ -523,7 +517,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(504, 641);
-            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.newGameButton);
             this.Controls.Add(this.button25);
             this.Controls.Add(this.button24);
             this.Controls.Add(this.button23);
@@ -549,11 +543,11 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.player2ScoreLabel);
-            this.Controls.Add(this.player1ScoreLabel);
-            this.Controls.Add(this.player2Label);
+            this.Controls.Add(this.labelScorePlayer2);
+            this.Controls.Add(this.labelScorePlayer1);
             this.Controls.Add(this.headerLabel);
-            this.Controls.Add(this.player1Label);
+            this.Controls.Add(this.labelNamePlayer2);
+            this.Controls.Add(this.labelNamePlayer1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
@@ -578,11 +572,11 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Label player1Label;
+        private System.Windows.Forms.Label labelNamePlayer1;
         private System.Windows.Forms.Label headerLabel;
-        private System.Windows.Forms.Label player2Label;
-        private System.Windows.Forms.Label player1ScoreLabel;
-        private System.Windows.Forms.Label player2ScoreLabel;
+        private System.Windows.Forms.Label labelNamePlayer2;
+        private System.Windows.Forms.Label labelScorePlayer1;
+        private System.Windows.Forms.Label labelScorePlayer2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
@@ -603,15 +597,14 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem playWithAIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;
-        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Button newGameButton;
     }
 }
 

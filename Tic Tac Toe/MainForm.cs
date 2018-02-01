@@ -20,6 +20,8 @@ namespace Tic_Tac_Toe
         // The current player's turn.
         private Player turn;
 
+        private Random random;
+
         public const int X = 5;
         public const int Y = 5;
 
@@ -37,12 +39,7 @@ namespace Tic_Tac_Toe
                 { button21, button22, button23, button24, button25 },
             };
 
-            // Create two new player objects.
-            player1 = new Player("Player 1", "X", Color.Blue, player1Label, player1ScoreLabel);
-            player2 = new Player("Player 2", "O", Color.Red, player2Label, player2ScoreLabel);
-
-            // Who plays first when the game starts.
-            turn = player1;
+            random = new Random();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -55,16 +52,51 @@ namespace Tic_Tac_Toe
             }
         }
 
+        private void newGameButton_Click(object sender, EventArgs e)
+        {
+            if (player1 == null || player2 == null)
+            {
+                NewGameForm newGameForm = new NewGameForm(CreateGame);
+                newGameForm.Show();
+            }
+            else
+            {
+                StartGame();
+            }
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewGameForm newGameForm = new NewGameForm(CreateGame);
+            newGameForm.Show();
+        }
+
+        private void CreateGame(Player player1, Player player2)
+        {
+            this.player1 = player1;
+            this.player2 = player2;
+
+            labelNamePlayer1.Text = player1.Νame;
+            labelScorePlayer1.Text = "0";
+            labelNamePlayer2.Text = player2.Νame;
+            labelScorePlayer2.Text = "0";
+            newGameButton.Text = "Restart";
+
+            StartGame();
+        }
+
         private void StartGame()
         {
+            turn = random.Next(0, 1) == 0 ? player1 : player2;
+
             foreach (Button button in buttons)
             {
                 button.Enabled = true;
             }
 
-            startButton.Visible = false;
+            newGameButton.Visible = false;
         }
-
+        
         private void ResetGame()
         {
             MatchMoves = 0;
@@ -80,8 +112,8 @@ namespace Tic_Tac_Toe
                 button.Enabled = false;
             }
 
-            startButton.Visible = true;
-            startButton.Focus();
+            newGameButton.Visible = true;
+            newGameButton.Focus();
         }
 
         private void EndGameWin()
@@ -89,6 +121,12 @@ namespace Tic_Tac_Toe
             MessageBox.Show(turn.ToString() + " won the game!");
 
             turn.AddWin();
+
+            if (turn == player1)
+                labelScorePlayer1.Text = turn.Score.ToString();
+            else
+                labelScorePlayer2.Text = turn.Score.ToString();
+
             ResetGame();
         }
 
@@ -104,11 +142,6 @@ namespace Tic_Tac_Toe
                 turn = player2;
             else
                 turn = player1;
-        }
-
-        private void startButton_Click(object sender, EventArgs e)
-        {
-            StartGame();
         }
 
         private void HandleMoves(object sender, EventArgs e)
@@ -155,6 +188,11 @@ namespace Tic_Tac_Toe
             }
 
             return new KeyValuePair<int, int>(x, y);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
