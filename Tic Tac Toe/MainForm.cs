@@ -23,6 +23,8 @@ namespace Tic_Tac_Toe
         public const int X = 5;
         public const int Y = 5;
 
+        public static int MatchMoves { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
@@ -65,6 +67,8 @@ namespace Tic_Tac_Toe
 
         private void ResetGame()
         {
+            MatchMoves = 0;
+
             player1.ResetMoves();
             player2.ResetMoves();
 
@@ -80,12 +84,26 @@ namespace Tic_Tac_Toe
             startButton.Focus();
         }
 
-        private void EndGame()
+        private void EndGameWin()
         {
             MessageBox.Show(turn.ToString() + " won the game!");
 
             turn.AddWin();
             ResetGame();
+        }
+
+        private void EndGameDraw()
+        {
+            MessageBox.Show("The game ended with a draw!");
+            ResetGame();
+        }
+
+        private void SwitchTurns()
+        {
+            if (turn.Equals(player1))
+                turn = player2;
+            else
+                turn = player1;
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -102,18 +120,19 @@ namespace Tic_Tac_Toe
 
             if (button.Text.Length == 0)
             {
-                bool won = turn.MakeMove(button, x, y);
+                MoveState state = turn.MakeMove(button, x, y);
 
-                if (won)
+                if (state == MoveState.Win)
                 {
-                    EndGame();
+                    EndGameWin();
+                }
+                else if (state == MoveState.Draw)
+                {
+                    EndGameDraw();
                 }
                 else
                 {
-                    if (turn.Equals(player1))
-                        turn = player2;
-                    else
-                        turn = player1;
+                    SwitchTurns();
                 }
             }
         }

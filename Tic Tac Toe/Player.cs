@@ -30,14 +30,29 @@ namespace Tic_Tac_Toe
             scoreLabel.Text = score.ToString();
         }
 
-        public bool MakeMove(Button button, int x, int y)
+        public MoveState MakeMove(Button button, int x, int y)
         {
             button.ForeColor = color;
             button.Text = mark;
 
             moves[x, y] = true;
-            return CheckHorizontal(x) || CheckVertical(y) || CheckDiagLeft() || CheckDiagRight();
+            MainForm.MatchMoves++;
+
+            if (CheckHorizontal(x) || CheckVertical(y) || CheckDiagLeft() || CheckDiagRight())
+            {
+                return MoveState.Win;
+            }
+            else if (CheckDraw())
+            {
+                return MoveState.Draw;
+            }
+            else
+            {
+                return MoveState.Continue;
+            }
         }
+
+        // Win detection
 
         private bool CheckHorizontal(int x)
         {
@@ -81,6 +96,13 @@ namespace Tic_Tac_Toe
             }
 
             return true;
+        }
+
+        // Draw detection
+
+        private bool CheckDraw()
+        {
+            return MainForm.MatchMoves == MainForm.X * MainForm.Y;
         }
         
         public void AddWin()
