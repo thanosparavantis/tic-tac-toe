@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Tic_Tac_Toe
@@ -105,16 +100,16 @@ namespace Tic_Tac_Toe
 
         private void StartGame()
         {
-            RandomTurn();
-
             foreach (Button button in buttons)
             {
                 button.Enabled = true;
             }
 
             newGameButton.Visible = false;
+
+            RandomTurn();
         }
-        
+
         private void ResetGame()
         {
             MatchMoves = 0;
@@ -162,6 +157,8 @@ namespace Tic_Tac_Toe
                 SetTurnPlayer1();
             else
                 SetTurnPlayer2();
+
+            CheckComputerPlay();
         }
 
         private void SwitchTurns()
@@ -170,6 +167,17 @@ namespace Tic_Tac_Toe
                 SetTurnPlayer2();
             else
                 SetTurnPlayer1();
+
+            CheckComputerPlay();
+        }
+
+        private void CheckComputerPlay()
+        {
+            if (turn.IsComputer)
+            {
+                Button selected = turn.SelectButton(turn.Equals(player1) ? player2 : player1, buttons);
+                selected.PerformClick();
+            }
         }
 
         private void SetTurnPlayer1()
@@ -228,9 +236,6 @@ namespace Tic_Tac_Toe
                 else
                 {
                     SwitchTurns();
-
-                    if (turn.IsComputer)
-                        MessageBox.Show("I like it baby");
                 }
             }
         }

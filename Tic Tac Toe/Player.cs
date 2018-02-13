@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿
 namespace Tic_Tac_Toe
 {
     public class Player
@@ -20,7 +13,11 @@ namespace Tic_Tac_Toe
 
         public bool IsComputer { get; private set; }
 
-        private bool[,] moves;
+        public bool[,] Moves { get; private set; }
+
+        private WinGoal winGoal;
+        private DrawGoal drawGoal;
+        private Random random;
 
         public Player(string name, string mark, Color color, bool isComputer = false)
         {
@@ -28,83 +25,43 @@ namespace Tic_Tac_Toe
             Μark = mark;
             Color = color;
             IsComputer = isComputer;
+            Moves = new bool[5, 5];
+            winGoal = new WinGoal();
+            drawGoal = new DrawGoal();
 
-            moves = new bool[5, 5];
+            random = new Random();
         }
         
+        public Button SelectButton(Player otherPlayer, Button[,] buttons)
+        {
+            int randX, randY;
+
+            do
+            {
+                randX = random.Next(0, MainForm.X);
+                randY = random.Next(0, MainForm.Y);
+            } while (otherPlayer.Moves[randX, randY] || Moves[randX, randY]);
+
+            return buttons[randX, randY];
+        }
+
         public MoveState MakeMove(Button button, int x, int y)
         {
             button.ForeColor = Color;
             button.Text = Μark;
 
-            moves[x, y] = true;
+            Moves[x, y] = true;
+
             MainForm.MatchMoves++;
 
-            if (CheckHorizontal(x) || CheckVertical(y) || CheckDiagLeft() || CheckDiagRight())
-            {
+            winGoal.UpdateCurrentMove(Moves, x, y);
+
+            if (winGoal.GoalReached())
                 return MoveState.Win;
-            }
-            else if (CheckDraw())
-            {
+            else if (drawGoal.GoalReached())
                 return MoveState.Draw;
-            }
             else
-            {
                 return MoveState.Continue;
-            }
-        }
-
-        // Win detection
-
-        private bool CheckHorizontal(int x)
-        {
-            for (int i = 0; i < MainForm.Y; i++)
-            {
-                if (!moves[x, i])
-                    return false;
-            }
-
-            return true;
-        }
-
-        private bool CheckVertical(int y)
-        {
-            for (int i = 0; i < MainForm.X; i++)
-            {
-                if (!moves[i, y])
-                    return false;
-            }
-
-            return true;
-        }
-
-        private bool CheckDiagLeft()
-        {
-            for (int i = 0; i < MainForm.X; i++)
-            {
-                if (!moves[i, i])
-                    return false;
-            }
-
-            return true;
-        }
-
-        private bool CheckDiagRight()
-        {
-            for (int i = 0; i < MainForm.X; i++)
-            {
-                if (!moves[i, (MainForm.X - 1) - i])
-                    return false;
-            }
-
-            return true;
-        }
-
-        // Draw detection
-
-        private bool CheckDraw()
-        {
-            return MainForm.MatchMoves == MainForm.X * MainForm.Y;
         }
         
         public void AddWin()
@@ -114,7 +71,7 @@ namespace Tic_Tac_Toe
 
         public void ResetMoves()
         {
-            moves = new bool[5, 5];
+            Moves = new bool[MainForm.X, MainForm.Y];
         }
 
         public override string ToString()
