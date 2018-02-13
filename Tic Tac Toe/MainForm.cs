@@ -12,6 +12,9 @@ namespace Tic_Tac_Toe
 {
     public partial class MainForm : Form
     {
+        public const int X = 5;
+        public const int Y = 5;
+
         private Button[,] buttons;
 
         // The two player references of the game.
@@ -22,8 +25,7 @@ namespace Tic_Tac_Toe
 
         private Random random;
 
-        public const int X = 5;
-        public const int Y = 5;
+        private NewGameForm newGameForm;
 
         public static int MatchMoves { get; set; }
 
@@ -56,8 +58,8 @@ namespace Tic_Tac_Toe
         {
             if (player1 == null || player2 == null)
             {
-                NewGameForm newGameForm = new NewGameForm(CreateGame);
-                newGameForm.Show();
+                if (IsNewGameFormClosed())
+                    OpenNewGameForm();
             }
             else
             {
@@ -67,8 +69,24 @@ namespace Tic_Tac_Toe
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewGameForm newGameForm = new NewGameForm(CreateGame);
+            if (IsNewGameFormClosed())
+            {
+                if (player1 != null && player2 != null)
+                    EndGameDraw();
+
+                OpenNewGameForm();
+            }
+        }
+
+        private void OpenNewGameForm()
+        {
+            newGameForm = new NewGameForm(CreateGame);
             newGameForm.Show();
+        }
+
+        private bool IsNewGameFormClosed()
+        {
+            return newGameForm == null || newGameForm.IsDisposed;
         }
 
         private void CreateGame(Player player1, Player player2)
@@ -87,7 +105,7 @@ namespace Tic_Tac_Toe
 
         private void StartGame()
         {
-            turn = random.Next(0, 1) == 0 ? player1 : player2;
+            RandomTurn();
 
             foreach (Button button in buttons)
             {
@@ -104,7 +122,7 @@ namespace Tic_Tac_Toe
             player1.ResetMoves();
             player2.ResetMoves();
 
-            turn = player1;
+            ResetNameLabels();
 
             foreach (Button button in buttons)
             {
@@ -136,12 +154,56 @@ namespace Tic_Tac_Toe
             ResetGame();
         }
 
+        private void RandomTurn()
+        {
+            int rand = random.Next(0, 2);
+
+            if (rand == 0)
+                SetTurnPlayer1();
+            else
+                SetTurnPlayer2();
+        }
+
         private void SwitchTurns()
         {
             if (turn.Equals(player1))
-                turn = player2;
+                SetTurnPlayer2();
             else
-                turn = player1;
+                SetTurnPlayer1();
+        }
+
+        private void SetTurnPlayer1()
+        {
+            turn = player1;
+            labelNamePlayer1.Font = new Font(labelNamePlayer1.Font, FontStyle.Bold);
+            labelNamePlayer1.ForeColor = turn.Color;
+            ResetNameLabel2();
+        }
+
+        private void SetTurnPlayer2()
+        {
+            turn = player2;
+            labelNamePlayer2.Font = new Font(labelNamePlayer2.Font, FontStyle.Bold);
+            labelNamePlayer2.ForeColor = turn.Color;
+            ResetNameLabel1();
+        }
+
+        private void ResetNameLabel1()
+        {
+            labelNamePlayer1.Font = new Font(labelNamePlayer1.Font, FontStyle.Regular);
+            labelNamePlayer1.ForeColor = Color.Black;
+        }
+
+        private void ResetNameLabel2()
+        {
+            labelNamePlayer2.Font = new Font(labelNamePlayer2.Font, FontStyle.Regular);
+            labelNamePlayer2.ForeColor = Color.Black;
+        }
+
+        private void ResetNameLabels()
+        {
+            ResetNameLabel1();
+            ResetNameLabel2();
         }
 
         private void HandleMoves(object sender, EventArgs e)
@@ -166,6 +228,9 @@ namespace Tic_Tac_Toe
                 else
                 {
                     SwitchTurns();
+
+                    if (turn.IsComputer)
+                        MessageBox.Show("I like it baby");
                 }
             }
         }
