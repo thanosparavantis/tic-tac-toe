@@ -58,7 +58,8 @@ namespace Tic_Tac_Toe
         {
             if (player1 == null || player2 == null)
             {
-                OpenNewGameForm();
+                if (IsNewGameFormClosed())
+                    OpenNewGameForm();
             }
             else
             {
@@ -68,17 +69,24 @@ namespace Tic_Tac_Toe
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EndGameDraw();
-            OpenNewGameForm();
+            if (IsNewGameFormClosed())
+            {
+                if (player1 != null && player2 != null)
+                    EndGameDraw();
+
+                OpenNewGameForm();
+            }
         }
 
         private void OpenNewGameForm()
         {
-            if (newGameForm == null || newGameForm.IsDisposed)
-            {
-                newGameForm = new NewGameForm(CreateGame);
-                newGameForm.Show();
-            }
+            newGameForm = new NewGameForm(CreateGame);
+            newGameForm.Show();
+        }
+
+        private bool IsNewGameFormClosed()
+        {
+            return newGameForm == null || newGameForm.IsDisposed;
         }
 
         private void CreateGame(Player player1, Player player2)
@@ -148,7 +156,9 @@ namespace Tic_Tac_Toe
 
         private void RandomTurn()
         {
-            if (random.Next(0, 1) == 0)
+            int rand = random.Next(0, 2);
+
+            if (rand == 0)
                 SetTurnPlayer1();
             else
                 SetTurnPlayer2();
@@ -218,6 +228,9 @@ namespace Tic_Tac_Toe
                 else
                 {
                     SwitchTurns();
+
+                    if (turn.IsComputer)
+                        MessageBox.Show("I like it baby");
                 }
             }
         }
