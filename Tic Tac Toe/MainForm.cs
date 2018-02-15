@@ -114,8 +114,8 @@ namespace Tic_Tac_Toe
         {
             MatchMoves = 0;
 
-            player1.ResetMoves();
-            player2.ResetMoves();
+            player1.Reset();
+            player2.Reset();
 
             ResetNameLabels();
 
