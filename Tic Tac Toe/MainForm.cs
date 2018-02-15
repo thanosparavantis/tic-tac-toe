@@ -131,7 +131,7 @@ namespace Tic_Tac_Toe
 
         private void EndGameWin()
         {
-            MessageBox.Show(turn.ToString() + " won the game!");
+            MessageBox.Show(turn.ToString() + " won the game!", "Match");
 
             turn.AddWin();
 
@@ -145,7 +145,7 @@ namespace Tic_Tac_Toe
 
         private void EndGameDraw()
         {
-            MessageBox.Show("The game ended with a draw!");
+            MessageBox.Show("The game ended with a draw!", "Match");
             ResetGame();
         }
 
