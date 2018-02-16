@@ -354,7 +354,15 @@ namespace Tic_Tac_Toe
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Αθανάσιος Παραβάντης (Π16112)", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+                "Excersise 2" + Environment.NewLine +
+                Environment.NewLine +
+                "Π16036. Παναγιώτης Ιωαννίδης" + Environment.NewLine +
+                "Π16097. Διονύσης Νίκας" + Environment.NewLine +
+                "Π16112. Αθανάσιος Παραβάντης",
+                "About",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
