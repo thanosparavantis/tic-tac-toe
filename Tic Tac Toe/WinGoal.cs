@@ -14,7 +14,7 @@
         // The y coordinate of the player's move.
         private int y;
 
-        private bool CheckDiagLeft(bool[,] moves)
+        private bool CheckDiagLeft()
         {
             // Check if the player has won on the right diagonal.
             //
@@ -24,14 +24,14 @@
             for (int i = 0; i < MainForm.X; i++)
             {
                 // If the player is missing one move then it's not a win.
-                if (!moves[i, (MainForm.X - 1) - i])
+                if (!this.moves[i, (MainForm.X - 1) - i])
                     return false;
             }
 
             return true;
         }
 
-        private bool CheckDiagRight(bool[,] moves)
+        private bool CheckDiagRight()
         {
             // Check if the player has won on the right diagonal.
             //
@@ -41,35 +41,35 @@
             for (int i = 0; i < MainForm.X; i++)
             {
                 // If the player is missing one move then it's not a win.
-                if (!moves[i, i])
+                if (!this.moves[i, i])
                     return false;
             }
 
             return true;
         }
 
-        private bool CheckHorizontal(bool[,] moves, int x)
+        private bool CheckHorizontal()
         {
             // Check if the player has won on the X axis.
 
             for (int i = 0; i < MainForm.Y; i++)
             {
                 // If the player is missing one move then it's not a win.
-                if (!moves[x, i])
+                if (!this.moves[x, i])
                     return false;
             }
 
             return true;
         }
 
-        private bool CheckVertical(bool[,] moves, int y)
+        private bool CheckVertical()
         {
             // Check if the player has won on the Y axis.
 
             for (int i = 0; i < MainForm.Y; i++)
             {
                 // If the player is missing one move then it's not a win.
-                if (!moves[i, y])
+                if (!this.moves[i, y])
                     return false;
             }
 
@@ -79,9 +79,8 @@
         public bool GoalReached()
         {
             // Check if the player has won on the X/Y axis or in the left/right diagonal.
-
-            return CheckHorizontal(moves, x) || CheckVertical(moves, y)
-                || CheckDiagRight(moves) || CheckDiagLeft(moves);
+            return this.CheckHorizontal() || this.CheckVertical() ||
+                this.CheckDiagRight() || this.CheckDiagLeft();
         }
 
         public void UpdateCurrentMove(bool[,] moves, int x, int y)
