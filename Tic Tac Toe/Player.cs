@@ -46,22 +46,22 @@ namespace Tic_Tac_Toe
         {
             // Initialize and create new objects.
 
-            Νame = name;
-            Μark = mark;
-            Color = color;
-            IsComputer = isComputer;
-            Moves = new bool[5, 5];
-            LastMoveX = -1;
-            LastMoveY = -1;
-            winGoal = new WinGoal();
-            drawGoal = new DrawGoal();
-            random = new Random();
+            this.Νame = name;
+            this.Μark = mark;
+            this.Color = color;
+            this.IsComputer = isComputer;
+            this.Moves = new bool[5, 5];
+            this.LastMoveX = -1;
+            this.LastMoveY = -1;
+            this.winGoal = new WinGoal();
+            this.drawGoal = new DrawGoal();
+            this.random = new Random();
         }
 
         public void AddWin()
         {
             // Increment the score counter.
-            Score++;
+            this.Score++;
         }
 
         public MoveState MakeMove(Button button, int x, int y)
@@ -73,20 +73,20 @@ namespace Tic_Tac_Toe
             button.Text = Μark;
 
             // Track the move on the board.
-            Moves[x, y] = true;
-            LastMoveX = x;
-            LastMoveY = y;
+            this.Moves[x, y] = true;
+            this.LastMoveX = x;
+            this.LastMoveY = y;
 
             // Increase the global number of moves for this match.
             MainForm.MatchMoves++;
 
             // Update the win goal criteria to take into account this specific move.
-            winGoal.UpdateCurrentMove(Moves, x, y);
+            this.winGoal.UpdateCurrentMove(Moves, x, y);
 
             // Check if the move can result to a win, draw or just continue the match.
-            if (winGoal.GoalReached())
+            if (this.winGoal.GoalReached())
                 return MoveState.Win;
-            else if (drawGoal.GoalReached())
+            else if (this.drawGoal.GoalReached())
                 return MoveState.Draw;
             else
                 return MoveState.Continue;
@@ -95,9 +95,9 @@ namespace Tic_Tac_Toe
         public void Reset()
         {
             // Reset the moves array and the X, Y coordinates of the last move.
-            Moves = new bool[MainForm.X, MainForm.Y];
-            LastMoveX = -1;
-            LastMoveY = -1;
+            this.Moves = new bool[MainForm.X, MainForm.Y];
+            this.LastMoveX = -1;
+            this.LastMoveY = -1;
         }
 
         public Button SelectButton(Player otherPlayer, Button[,] buttons)
@@ -148,7 +148,7 @@ namespace Tic_Tac_Toe
 
                 // Check if the X and Y coordinates are valid and not blocked/used.
                 if (x > 0 && y > 0 && x != MainForm.X && y != MainForm.Y &&
-                    !otherPlayer.Moves[x, y] && !Moves[x, y])
+                    !otherPlayer.Moves[x, y] && !this.Moves[x, y])
                 {
                     // Add our option to the list.
                     validOptions.Add(new int[] {x, y});
@@ -161,7 +161,7 @@ namespace Tic_Tac_Toe
                 // then we can make a move relative to his last one.
 
                 // Get a random position relative to his last move.
-                int[] choice = validOptions[random.Next(validOptions.Count)];
+                int[] choice = validOptions[this.random.Next(validOptions.Count)];
                 buttonX = choice[0];
                 buttonY = choice[1];
             }
@@ -172,12 +172,12 @@ namespace Tic_Tac_Toe
 
                 do
                 {
-                    buttonX = random.Next(MainForm.X);
-                    buttonY = random.Next(MainForm.Y);
+                    buttonX = this.random.Next(MainForm.X);
+                    buttonY = this.random.Next(MainForm.Y);
 
                     // We want to make sure our random move can be actually made.
                     // The button may have already been clicked, keep searching if that's the case.
-                } while (otherPlayer.Moves[buttonX, buttonY] || Moves[buttonX, buttonY]);
+                } while (otherPlayer.Moves[buttonX, buttonY] || this.Moves[buttonX, buttonY]);
             }
 
             // Return the button that was selected.
@@ -187,7 +187,7 @@ namespace Tic_Tac_Toe
         public override string ToString()
         {
             // Overrides the default ToString() method, returns the name of the player instead.
-            return Νame;
+            return this.Νame;
         }
     }
 }
