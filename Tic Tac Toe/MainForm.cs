@@ -51,7 +51,7 @@ namespace Tic_Tac_Toe
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "Excersise 2" + Environment.NewLine +
+                "Exercise 2" + Environment.NewLine +
                 Environment.NewLine +
                 "Π16036. Παναγιώτης Ιωαννίδης" + Environment.NewLine +
                 "Π16097. Διονύσης Νίκας" + Environment.NewLine +

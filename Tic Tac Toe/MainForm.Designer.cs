@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +67,11 @@
             this.button24 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.newGameButton = new System.Windows.Forms.Button();
+            this.table1 = new System.Windows.Forms.TableLayoutPanel();
+            this.table2 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1.SuspendLayout();
+            this.table1.SuspendLayout();
+            this.table2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -121,19 +126,23 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // labelNamePlayer1
             // 
+            this.labelNamePlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelNamePlayer1.AutoSize = true;
             this.labelNamePlayer1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.labelNamePlayer1.Location = new System.Drawing.Point(26, 70);
+            this.labelNamePlayer1.Location = new System.Drawing.Point(3, 0);
             this.labelNamePlayer1.Name = "labelNamePlayer1";
-            this.labelNamePlayer1.Size = new System.Drawing.Size(79, 25);
+            this.labelNamePlayer1.Size = new System.Drawing.Size(114, 26);
             this.labelNamePlayer1.TabIndex = 26;
             this.labelNamePlayer1.Text = "Player 1";
+            this.labelNamePlayer1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // headerLabel
             // 
@@ -147,33 +156,45 @@
             // 
             // labelNamePlayer2
             // 
+            this.labelNamePlayer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelNamePlayer2.AutoSize = true;
             this.labelNamePlayer2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNamePlayer2.Location = new System.Drawing.Point(410, 70);
+            this.labelNamePlayer2.Location = new System.Drawing.Point(3, 0);
             this.labelNamePlayer2.Name = "labelNamePlayer2";
-            this.labelNamePlayer2.Size = new System.Drawing.Size(79, 25);
+            this.labelNamePlayer2.Size = new System.Drawing.Size(114, 26);
             this.labelNamePlayer2.TabIndex = 29;
             this.labelNamePlayer2.Text = "Player 2";
+            this.labelNamePlayer2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelScorePlayer1
             // 
+            this.labelScorePlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelScorePlayer1.AutoSize = true;
             this.labelScorePlayer1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.labelScorePlayer1.Location = new System.Drawing.Point(46, 104);
+            this.labelScorePlayer1.Location = new System.Drawing.Point(3, 26);
             this.labelScorePlayer1.Name = "labelScorePlayer1";
-            this.labelScorePlayer1.Size = new System.Drawing.Size(23, 25);
+            this.labelScorePlayer1.Size = new System.Drawing.Size(114, 38);
             this.labelScorePlayer1.TabIndex = 30;
             this.labelScorePlayer1.Text = "0";
+            this.labelScorePlayer1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelScorePlayer2
             // 
+            this.labelScorePlayer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelScorePlayer2.AutoSize = true;
             this.labelScorePlayer2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.labelScorePlayer2.Location = new System.Drawing.Point(437, 104);
+            this.labelScorePlayer2.Location = new System.Drawing.Point(3, 26);
             this.labelScorePlayer2.Name = "labelScorePlayer2";
-            this.labelScorePlayer2.Size = new System.Drawing.Size(23, 25);
+            this.labelScorePlayer2.Size = new System.Drawing.Size(114, 38);
             this.labelScorePlayer2.TabIndex = 31;
             this.labelScorePlayer2.Text = "0";
+            this.labelScorePlayer2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button1
             // 
@@ -512,12 +533,48 @@
             this.newGameButton.UseVisualStyleBackColor = true;
             this.newGameButton.Click += new System.EventHandler(this.newGameButton_Click);
             // 
+            // table1
+            // 
+            this.table1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.table1.ColumnCount = 1;
+            this.table1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.table1.Controls.Add(this.labelNamePlayer1, 0, 0);
+            this.table1.Controls.Add(this.labelScorePlayer1, 0, 1);
+            this.table1.Location = new System.Drawing.Point(15, 56);
+            this.table1.Name = "table1";
+            this.table1.RowCount = 2;
+            this.table1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.table1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.table1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.table1.Size = new System.Drawing.Size(120, 64);
+            this.table1.TabIndex = 58;
+            // 
+            // table2
+            // 
+            this.table2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.table2.ColumnCount = 1;
+            this.table2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.table2.Controls.Add(this.labelNamePlayer2, 0, 0);
+            this.table2.Controls.Add(this.labelScorePlayer2, 0, 1);
+            this.table2.Location = new System.Drawing.Point(365, 56);
+            this.table2.Name = "table2";
+            this.table2.RowCount = 2;
+            this.table2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.table2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.table2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.table2.Size = new System.Drawing.Size(120, 64);
+            this.table2.TabIndex = 59;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(504, 641);
+            this.Controls.Add(this.table2);
+            this.Controls.Add(this.table1);
             this.Controls.Add(this.newGameButton);
             this.Controls.Add(this.button25);
             this.Controls.Add(this.button24);
@@ -544,13 +601,10 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.labelScorePlayer2);
-            this.Controls.Add(this.labelScorePlayer1);
             this.Controls.Add(this.headerLabel);
-            this.Controls.Add(this.labelNamePlayer2);
-            this.Controls.Add(this.labelNamePlayer1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(520, 680);
@@ -561,6 +615,10 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.table1.ResumeLayout(false);
+            this.table1.PerformLayout();
+            this.table2.ResumeLayout(false);
+            this.table2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,6 +664,8 @@
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button newGameButton;
+        private System.Windows.Forms.TableLayoutPanel table1;
+        private System.Windows.Forms.TableLayoutPanel table2;
     }
 }
 
