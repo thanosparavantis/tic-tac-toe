@@ -22,12 +22,20 @@ namespace Tic_Tac_Toe
             this.handler = handler;
         }
 
-        private void NewGameForm_Load(object sender, EventArgs e)
+        private void ApplyBlueStyle(Button button)
         {
-            // When the form loads apply the blue and red style to the markers.
+            // Apply the styles of a blue marker to a specific button.
 
-            ApplyBlueStyle(buttonMarkPlayer1);
-            ApplyRedStyle(buttonMarkPlayer2);
+            button.ForeColor = Color.Blue;
+            button.Text = "X";
+        }
+
+        private void ApplyRedStyle(Button button)
+        {
+            // Apply the styles of a red marker to a specific button.
+
+            button.ForeColor = Color.Red;
+            button.Text = "O";
         }
 
         private void buttonMarkPlayer1_Click(object sender, EventArgs e)
@@ -44,38 +52,6 @@ namespace Tic_Tac_Toe
 
             SwitchMarkers(buttonMarkPlayer2);
             SwitchMarkers(buttonMarkPlayer1);
-        }
-
-        private void SwitchMarkers(Button button)
-        {
-            if (button.ForeColor == Color.Blue)
-            {
-                // If the button is blue, then switch to a red marker.
-
-                ApplyRedStyle(button);
-            }
-            else
-            {
-                // If the button is red, then switch to a blue marker.
-
-                ApplyBlueStyle(button);
-            }
-        }
-
-        private void ApplyBlueStyle(Button button)
-        {
-            // Apply the styles of a blue marker to a specific button.
-
-            button.ForeColor = Color.Blue;
-            button.Text = "X";
-        }
-
-        private void ApplyRedStyle(Button button)
-        {
-            // Apply the styles of a red marker to a specific button.
-
-            button.ForeColor = Color.Red;
-            button.Text = "O";
         }
 
         private void newGameButton_Click(object sender, EventArgs e)
@@ -100,6 +76,30 @@ namespace Tic_Tac_Toe
 
             // Close the form.
             this.Close();
+        }
+
+        private void NewGameForm_Load(object sender, EventArgs e)
+        {
+            // When the form loads apply the blue and red style to the markers.
+
+            ApplyBlueStyle(buttonMarkPlayer1);
+            ApplyRedStyle(buttonMarkPlayer2);
+        }
+
+        private void SwitchMarkers(Button button)
+        {
+            if (button.ForeColor == Color.Blue)
+            {
+                // If the button is blue, then switch to a red marker.
+
+                ApplyRedStyle(button);
+            }
+            else
+            {
+                // If the button is red, then switch to a blue marker.
+
+                ApplyBlueStyle(button);
+            }
         }
     }
 }
