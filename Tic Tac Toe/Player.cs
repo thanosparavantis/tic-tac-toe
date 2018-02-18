@@ -58,6 +58,48 @@ namespace Tic_Tac_Toe
             random = new Random();
         }
 
+        public void AddWin()
+        {
+            // Increment the score counter.
+            Score++;
+        }
+
+        public MoveState MakeMove(Button button, int x, int y)
+        {
+            // Makes a move on the board.
+
+            // Change the color and the text of the button.
+            button.ForeColor = Color;
+            button.Text = Μark;
+
+            // Track the move on the board.
+            Moves[x, y] = true;
+            LastMoveX = x;
+            LastMoveY = y;
+
+            // Increase the global number of moves for this match.
+            MainForm.MatchMoves++;
+
+            // Update the win goal criteria to take into account this specific move.
+            winGoal.UpdateCurrentMove(Moves, x, y);
+
+            // Check if the move can result to a win, draw or just continue the match.
+            if (winGoal.GoalReached())
+                return MoveState.Win;
+            else if (drawGoal.GoalReached())
+                return MoveState.Draw;
+            else
+                return MoveState.Continue;
+        }
+
+        public void Reset()
+        {
+            // Reset the moves array and the X, Y coordinates of the last move.
+            Moves = new bool[MainForm.X, MainForm.Y];
+            LastMoveX = -1;
+            LastMoveY = -1;
+        }
+
         public Button SelectButton(Player otherPlayer, Button[,] buttons)
         {
             // The X and Y coordinates of the button that will be selected.
@@ -140,48 +182,6 @@ namespace Tic_Tac_Toe
 
             // Return the button that was selected.
             return buttons[buttonX, buttonY];
-        }
-
-        public MoveState MakeMove(Button button, int x, int y)
-        {
-            // Makes a move on the board.
-
-            // Change the color and the text of the button.
-            button.ForeColor = Color;
-            button.Text = Μark;
-
-            // Track the move on the board.
-            Moves[x, y] = true;
-            LastMoveX = x;
-            LastMoveY = y;
-
-            // Increase the global number of moves for this match.
-            MainForm.MatchMoves++;
-
-            // Update the win goal criteria to take into account this specific move.
-            winGoal.UpdateCurrentMove(Moves, x, y);
-
-            // Check if the move can result to a win, draw or just continue the match.
-            if (winGoal.GoalReached())
-                return MoveState.Win;
-            else if (drawGoal.GoalReached())
-                return MoveState.Draw;
-            else
-                return MoveState.Continue;
-        }
-        
-        public void AddWin()
-        {
-            // Increment the score counter.
-            Score++;
-        }
-
-        public void Reset()
-        {
-            // Reset the moves array and the X, Y coordinates of the last move.
-            Moves = new bool[MainForm.X, MainForm.Y];
-            LastMoveX = -1;
-            LastMoveY = -1;
         }
 
         public override string ToString()
