@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewGameForm));
             this.labelNamePlayer1 = new System.Windows.Forms.Label();
             this.namePlayer1 = new System.Windows.Forms.TextBox();
             this.labelPlayer1 = new System.Windows.Forms.Label();
@@ -157,6 +158,7 @@
             this.Controls.Add(this.buttonMarkPlayer2);
             this.Controls.Add(this.computerCheckbox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(400, 400);
             this.MinimizeBox = false;

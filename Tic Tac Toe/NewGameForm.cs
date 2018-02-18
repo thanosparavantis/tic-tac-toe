@@ -22,46 +22,6 @@ namespace Tic_Tac_Toe
             this.handler = handler;
         }
 
-        private void NewGameForm_Load(object sender, EventArgs e)
-        {
-            // When the form loads apply the blue and red style to the markers.
-
-            ApplyBlueStyle(buttonMarkPlayer1);
-            ApplyRedStyle(buttonMarkPlayer2);
-        }
-
-        private void buttonMarkPlayer1_Click(object sender, EventArgs e)
-        {
-            // When the player 1 marker is clicked, switch markers.
-
-            SwitchMarkers(buttonMarkPlayer1);
-            SwitchMarkers(buttonMarkPlayer2);
-        }
-
-        private void buttonMarkPlayer2_Click(object sender, EventArgs e)
-        {
-            // When the player 2 marker is clicked, switch markers.
-
-            SwitchMarkers(buttonMarkPlayer2);
-            SwitchMarkers(buttonMarkPlayer1);
-        }
-
-        private void SwitchMarkers(Button button)
-        {
-            if (button.ForeColor == Color.Blue)
-            {
-                // If the button is blue, then switch to a red marker.
-
-                ApplyRedStyle(button);
-            }
-            else
-            {
-                // If the button is red, then switch to a blue marker.
-
-                ApplyBlueStyle(button);
-            }
-        }
-
         private void ApplyBlueStyle(Button button)
         {
             // Apply the styles of a blue marker to a specific button.
@@ -78,28 +38,68 @@ namespace Tic_Tac_Toe
             button.Text = "O";
         }
 
+        private void buttonMarkPlayer1_Click(object sender, EventArgs e)
+        {
+            // When the player 1 marker is clicked, switch markers.
+
+            this.SwitchMarkers(this.buttonMarkPlayer1);
+            this.SwitchMarkers(this.buttonMarkPlayer2);
+        }
+
+        private void buttonMarkPlayer2_Click(object sender, EventArgs e)
+        {
+            // When the player 2 marker is clicked, switch markers.
+
+            this.SwitchMarkers(this.buttonMarkPlayer2);
+            this.SwitchMarkers(this.buttonMarkPlayer1);
+        }
+
         private void newGameButton_Click(object sender, EventArgs e)
         {
             // Collect the characteristics of the first player.
-            string name1 = namePlayer1.Text == "" ? "Player 1" : namePlayer1.Text;
-            string mark1 = buttonMarkPlayer1.Text;
-            Color color1 = buttonMarkPlayer1.ForeColor;
+            string name1 = this.namePlayer1.Text == "" ? "Player 1" : this.namePlayer1.Text;
+            string mark1 = this.buttonMarkPlayer1.Text;
+            Color color1 = this.buttonMarkPlayer1.ForeColor;
 
             // Collect the characteristics of the second player.
-            string name2 = namePlayer2.Text == "" ? "Player 2" : namePlayer2.Text;
-            string mark2 = buttonMarkPlayer2.Text;
-            Color color2 = buttonMarkPlayer2.ForeColor;
-            bool isComputer = computerCheckbox.Checked;
+            string name2 = this.namePlayer2.Text == "" ? "Player 2" : this.namePlayer2.Text;
+            string mark2 = this.buttonMarkPlayer2.Text;
+            Color color2 = this.buttonMarkPlayer2.ForeColor;
+            bool isComputer = this.computerCheckbox.Checked;
 
             // Create new player objects and assign references.
             Player player1 = new Player(name1, mark1, color1);
             Player player2 = new Player(name2, mark2, color2, isComputer);
 
             // Call the delegate and pass the two player references.
-            handler(player1, player2);
+            this.handler(player1, player2);
 
             // Close the form.
             this.Close();
+        }
+
+        private void NewGameForm_Load(object sender, EventArgs e)
+        {
+            // When the form loads apply the blue and red style to the markers.
+
+            this.ApplyBlueStyle(buttonMarkPlayer1);
+            this.ApplyRedStyle(buttonMarkPlayer2);
+        }
+
+        private void SwitchMarkers(Button button)
+        {
+            if (button.ForeColor == Color.Blue)
+            {
+                // If the button is blue, then switch to a red marker.
+
+                this.ApplyRedStyle(button);
+            }
+            else
+            {
+                // If the button is red, then switch to a blue marker.
+
+                this.ApplyBlueStyle(button);
+            }
         }
     }
 }

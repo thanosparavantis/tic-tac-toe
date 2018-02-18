@@ -36,7 +36,7 @@ namespace Tic_Tac_Toe
             InitializeComponent();
             
             // Initialize the 2-dimensional array of usable buttons.
-            buttons = new Button[X, Y] {
+            this.buttons = new Button[X, Y] {
                 { button1, button2, button3, button4, button5 },
                 { button6, button7, button8, button9, button10 },
                 { button11, button12, button13, button14, button15 },
@@ -45,66 +45,34 @@ namespace Tic_Tac_Toe
             };
 
             // Create a new random object.
-            random = new Random();
+            this.random = new Random();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Loop through all registered buttons and add a new click event handler.
-            foreach (Button button in buttons)
+            MessageBox.Show(
+                "Exercise 2" + Environment.NewLine +
+                Environment.NewLine +
+                "Π16036. Παναγιώτης Ιωαννίδης" + Environment.NewLine +
+                "Π16097. Διονύσης Νίκας" + Environment.NewLine +
+                "Π16112. Αθανάσιος Παραβάντης",
+                "About",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private void CheckComputerPlay()
+        {
+            // Check if the player is controlled by the computer.
+            if (this.turn.IsComputer)
             {
-                // At first, all buttons are disabled until the match starts.
-                button.Enabled = false;
+                // If that's the case then select a button and perform a click.
+                Button selected = this.turn.SelectButton(
+                    this.turn.Equals(player1) ? this.player2 : this.player1, this.buttons);
 
-                // Add a new event handler, HandleMoves() is the method handling this event.
-                button.Click += new EventHandler(this.HandleMoves);
+                // Click the button that was selected.
+                selected.PerformClick();
             }
-        }
-
-        private void newGameButton_Click(object sender, EventArgs e)
-        {
-            // The new button should open the new game form if there are no players.
-            if (player1 == null || player2 == null)
-            {
-                // Prevent the game form from opening more than once.
-                if (IsNewGameFormClosed())
-                    OpenNewGameForm();
-            }
-            // Otherwise we already have two players so we just start the game.
-            // At this point the first match already finished and we are ready to start a new one.
-            else
-            {
-                StartGame();
-            }
-        }
-
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Make sure the game form isn't already opened.
-            if (IsNewGameFormClosed())
-            {
-                // If we already have two players created, just reset the game.
-                // For example, if a match is already started we will end it gracefully.
-                if (player1 != null && player2 != null)
-                    ResetGame();
-
-                // Open the new game form to create new players.
-                OpenNewGameForm();
-            }
-        }
-
-        private void OpenNewGameForm()
-        {
-            // Create a new game form object and show the form.
-            // The new game form requires a game creation handler as a callback, we use delegates.
-            newGameForm = new NewGameForm(CreateGame);
-            newGameForm.Show();
-        }
-
-        private bool IsNewGameFormClosed()
-        {
-            // Check if the new game form is null or already closed, then we can open it.
-            return newGameForm == null || newGameForm.IsDisposed;
         }
 
         private void CreateGame(Player player1, Player player2)
@@ -117,76 +85,16 @@ namespace Tic_Tac_Toe
             this.player2 = player2;
 
             // Updated the score labels.
-            labelNamePlayer1.Text = player1.Νame;
-            labelScorePlayer1.Text = "0";
-            labelNamePlayer2.Text = player2.Νame;
-            labelScorePlayer2.Text = "0";
-            
+            this.labelNamePlayer1.Text = player1.Νame;
+            this.labelScorePlayer1.Text = "0";
+            this.labelNamePlayer2.Text = player2.Νame;
+            this.labelScorePlayer2.Text = "0";
+
             // The new game button now works as a Restart button when every match ends.
-            newGameButton.Text = "Restart";
+            this.newGameButton.Text = "Restart";
 
             // Everything is ready, start the game.
-            StartGame();
-        }
-
-        private void StartGame()
-        {
-            // Enable all buttons so they can be clicked.
-            foreach (Button button in buttons)
-            {
-                button.Enabled = true;
-            }
-
-            // The new game button is no longer visible since the match has started.
-            newGameButton.Visible = false;
-
-            // Choose randomly one of the two players for the first turn.
-            RandomTurn();
-        }
-
-        private void ResetGame()
-        {
-            // This method cleans everything up after a match finishes.
-            // All player settings are preserved, this will only prepare the game for a new match.
-
-            // Reset the number of moves for this match.
-            MatchMoves = 0;
-
-            // Reset each player.
-            player1.Reset();
-            player2.Reset();
-
-            // Reset the player labels.
-            ResetNameLabels();
-
-            // Remove the text from all buttons and disable them.
-            foreach (Button button in buttons)
-            {
-                button.Text = "";
-                button.Enabled = false;
-            }
-
-            // Make the Restart button visible again.
-            newGameButton.Visible = true;
-            newGameButton.Focus();
-        }
-
-        private void EndGameWin()
-        {
-            // Display a message box for the winner.
-            MessageBox.Show(turn.ToString() + " won the game!", "Match");
-
-            // Add one to the total wins of the player.
-            turn.AddWin();
-
-            // Update the score label of the winner.
-            if (turn == player1)
-                labelScorePlayer1.Text = turn.Score.ToString();
-            else
-                labelScorePlayer2.Text = turn.Score.ToString();
-
-            // Reset the current game, prepare for the next one.
-            ResetGame();
+            this.StartGame();
         }
 
         private void EndGameDraw()
@@ -195,98 +103,55 @@ namespace Tic_Tac_Toe
             MessageBox.Show("The game ended with a draw!", "Match");
 
             // Reset the current game, prepare for the next one.
-            ResetGame();
+            this.ResetGame();
         }
 
-        private void RandomTurn()
+        private void EndGameWin()
         {
-            // Generate a random number from 0 to 1, basically true/false.
-            int rand = random.Next(0, 2);
+            // Display a message box for the winner.
+            MessageBox.Show(this.turn.ToString() + " won the game!", "Match");
 
-            // Choose who is going to play next.
-            if (rand == 0)
-                SetTurnPlayer1();
+            // Add one to the total wins of the player.
+            this.turn.AddWin();
+
+            // Update the score label of the winner.
+            if (this.turn == player1)
+                this.labelScorePlayer1.Text = this.turn.Score.ToString();
             else
-                SetTurnPlayer2();
+                this.labelScorePlayer2.Text = this.turn.Score.ToString();
 
-            // Check if the player is being controlled by the computer,
-            // if that's the case then make a move.
-            CheckComputerPlay();
+            // Reset the current game, prepare for the next one.
+            this.ResetGame();
         }
 
-        private void SwitchTurns()
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Choose who is going to play next.
-            // If this was player 1's turn, then player 2 is going to play next.
-            // If this was player 2's turn, then player 1 is going to play next.
-            if (turn.Equals(player1))
-                SetTurnPlayer2();
-            else
-                SetTurnPlayer1();
-
-            // Check if the player is being controlled by the computer,
-            // if that's the case then make a move.
-            CheckComputerPlay();
+            Application.Exit();
         }
 
-        private void CheckComputerPlay()
+        private KeyValuePair<int, int> GetCoordinates(Button button)
         {
-            // Check if the player is controlled by the computer.
-            if (turn.IsComputer)
+            // Initialize x, y variables.
+            int x = 0, y = 0;
+
+            // Loop through all buttons along the X and Y axis.
+            for (int i = 0; i < X; i++)
             {
-                // If that's the case then select a button and perform a click.
-                Button selected = turn.SelectButton(turn.Equals(player1) ? player2 : player1, buttons);
-
-                // Click the button that was selected.
-                selected.PerformClick();
+                for (int j = 0; j < Y; j++)
+                {
+                    // If the buttons are equal then get the x and y coordinates.
+                    if (this.buttons[i, j].Equals(button))
+                    {
+                        x = i;
+                        y = j;
+                        break;
+                    }
+                }
             }
-        }
 
-        private void SetTurnPlayer1()
-        {
-            // Player 1 is now playing.
-            turn = player1;
-
-            // Change the name label of player 1 to indicate his turn.
-            labelNamePlayer1.Font = new Font(labelNamePlayer1.Font, FontStyle.Bold);
-            labelNamePlayer1.ForeColor = turn.Color;
-
-            // Reset the name label of player 2.
-            ResetNameLabel2();
-        }
-
-        private void SetTurnPlayer2()
-        {
-            // Player 2 is now playing.
-            turn = player2;
-
-            // Change the name label of player 2 to indicate his turn.
-            labelNamePlayer2.Font = new Font(labelNamePlayer2.Font, FontStyle.Bold);
-            labelNamePlayer2.ForeColor = turn.Color;
-
-            // Reset the name label of player 1.
-            ResetNameLabel1();
-        }
-
-        private void ResetNameLabel1()
-        {
-            // Reset the name label of player 1 back to it's original state.
-            labelNamePlayer1.Font = new Font(labelNamePlayer1.Font, FontStyle.Regular);
-            labelNamePlayer1.ForeColor = Color.Black;
-        }
-
-        private void ResetNameLabel2()
-        {
-            // Reset the name label of player 2 back to it's original state.
-            labelNamePlayer2.Font = new Font(labelNamePlayer2.Font, FontStyle.Regular);
-            labelNamePlayer2.ForeColor = Color.Black;
-        }
-
-        private void ResetNameLabels()
-        {
-            // Reset all name labels back to their original state.
-            ResetNameLabel1();
-            ResetNameLabel2();
+            // Return a new key-pair object that will hold the x and y variables.
+            // Basically we're returning two variables.
+            return new KeyValuePair<int, int>(x, y);
         }
 
         private void HandleMoves(object sender, EventArgs e)
@@ -305,69 +170,205 @@ namespace Tic_Tac_Toe
             if (button.Text.Length == 0)
             {
                 // Register the move of the current player.
-                MoveState state = turn.MakeMove(button, x, y);
+                MoveState state = this.turn.MakeMove(button, x, y);
 
                 // Determine the result of the move.
                 if (state == MoveState.Win)
                 {
                     // The move formed a set of Xs or Os that resulted to a win.
-                    EndGameWin();
+                    this.EndGameWin();
                 }
                 else if (state == MoveState.Draw)
                 {
                     // The move didn't result to a win and all buttons are clicked.
-                    EndGameDraw();
+                    this.EndGameDraw();
                 }
                 else
                 {
                     // The match still has potential and may result to a win or a draw.
                     // Switch turns and let the other player make his move.
-                    SwitchTurns();
+                    this.SwitchTurns();
                 }
             }
         }
 
-        private KeyValuePair<int, int> GetCoordinates(Button button)
+        private bool IsNewGameFormClosed()
         {
-            // Initialize x, y variables.
-            int x = 0, y = 0;
+            // Check if the new game form is null or already closed, then we can open it.
+            return this.newGameForm == null || this.newGameForm.IsDisposed;
+        }
 
-            // Loop through all buttons along the X and Y axis.
-            for (int i = 0; i < X; i++)
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            // Loop through all registered buttons and add a new click event handler.
+            foreach (Button button in buttons)
             {
-                for (int j = 0; j < Y; j++)
-                {
-                    // If the buttons are equal then get the x and y coordinates.
-                    if (buttons[i, j].Equals(button))
-                    {
-                        x = i;
-                        y = j;
-                        break;
-                    }
-                }
+                // At first, all buttons are disabled until the match starts.
+                button.Enabled = false;
+
+                // Add a new event handler, HandleMoves() is the method handling this event.
+                button.Click += new EventHandler(this.HandleMoves);
+            }
+        }
+
+        private void newGameButton_Click(object sender, EventArgs e)
+        {
+            // The new button should open the new game form if there are no players.
+            if (this.player1 == null || this.player2 == null)
+            {
+                // Prevent the game form from opening more than once.
+                if (this.IsNewGameFormClosed())
+                    this.OpenNewGameForm();
+            }
+            // Otherwise we already have two players so we just start the game.
+            // At this point the first match already finished and we are ready to start a new one.
+            else
+            {
+                this.StartGame();
+            }
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make sure the game form isn't already opened.
+            if (this.IsNewGameFormClosed())
+            {
+                // If we already have two players created, just reset the game.
+                // For example, if a match is already started we will end it gracefully.
+                if (this.player1 != null && this.player2 != null)
+                    this.ResetGame();
+
+                // Open the new game form to create new players.
+                this.OpenNewGameForm();
+            }
+        }
+
+        private void OpenNewGameForm()
+        {
+            // Create a new game form object and show the form.
+            // The new game form requires a game creation handler as a callback, we use delegates.
+            this.newGameForm = new NewGameForm(this.CreateGame);
+            this.newGameForm.Show();
+        }
+
+        private void RandomTurn()
+        {
+            // Generate a random number from 0 to 1, basically true/false.
+            int rand = this.random.Next(0, 2);
+
+            // Choose who is going to play next.
+            if (rand == 0)
+                this.SetTurnPlayer1();
+            else
+                this.SetTurnPlayer2();
+
+            // Check if the player is being controlled by the computer,
+            // if that's the case then make a move.
+            this.CheckComputerPlay();
+        }
+
+        private void ResetGame()
+        {
+            // This method cleans everything up after a match finishes.
+            // All player settings are preserved, this will only prepare the game for a new match.
+
+            // Reset the number of moves for this match.
+            MatchMoves = 0;
+
+            // Reset each player.
+            this.player1.Reset();
+            this.player2.Reset();
+
+            // Reset the player labels.
+            this.ResetNameLabels();
+
+            // Remove the text from all buttons and disable them.
+            foreach (Button button in this.buttons)
+            {
+                button.Text = "";
+                button.Enabled = false;
             }
 
-            // Return a new key-pair object that will hold the x and y variables.
-            // Basically we're returning two variables.
-            return new KeyValuePair<int, int>(x, y);
+            // Make the Restart button visible again.
+            this.newGameButton.Visible = true;
+            this.newGameButton.Focus();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ResetNameLabel1()
         {
-            MessageBox.Show(
-                "Excersise 2" + Environment.NewLine +
-                Environment.NewLine +
-                "Π16036. Παναγιώτης Ιωαννίδης" + Environment.NewLine +
-                "Π16097. Διονύσης Νίκας" + Environment.NewLine +
-                "Π16112. Αθανάσιος Παραβάντης",
-                "About",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            // Reset the name label of player 1 back to it's original state.
+            this.labelNamePlayer1.Font = new Font(this.labelNamePlayer1.Font, FontStyle.Regular);
+            this.labelNamePlayer1.ForeColor = Color.Black;
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ResetNameLabel2()
         {
-            Application.Exit();
+            // Reset the name label of player 2 back to it's original state.
+            this.labelNamePlayer2.Font = new Font(this.labelNamePlayer2.Font, FontStyle.Regular);
+            this.labelNamePlayer2.ForeColor = Color.Black;
+        }
+
+        private void ResetNameLabels()
+        {
+            // Reset all name labels back to their original state.
+            this.ResetNameLabel1();
+            this.ResetNameLabel2();
+        }
+
+        private void SetTurnPlayer1()
+        {
+            // Player 1 is now playing.
+            this.turn = this.player1;
+
+            // Change the name label of player 1 to indicate his turn.
+            this.labelNamePlayer1.Font = new Font(this.labelNamePlayer1.Font, FontStyle.Bold);
+            this.labelNamePlayer1.ForeColor = this.turn.Color;
+
+            // Reset the name label of player 2.
+            this.ResetNameLabel2();
+        }
+
+        private void SetTurnPlayer2()
+        {
+            // Player 2 is now playing.
+            this.turn = this.player2;
+
+            // Change the name label of player 2 to indicate his turn.
+            this.labelNamePlayer2.Font = new Font(this.labelNamePlayer2.Font, FontStyle.Bold);
+            this.labelNamePlayer2.ForeColor = this.turn.Color;
+
+            // Reset the name label of player 1.
+            this.ResetNameLabel1();
+        }
+
+        private void StartGame()
+        {
+            // Enable all buttons so they can be clicked.
+            foreach (Button button in this.buttons)
+            {
+                button.Enabled = true;
+            }
+
+            // The new game button is no longer visible since the match has started.
+            this.newGameButton.Visible = false;
+
+            // Choose randomly one of the two players for the first turn.
+            this.RandomTurn();
+        }
+
+        private void SwitchTurns()
+        {
+            // Choose who is going to play next.
+            // If this was player 1's turn, then player 2 is going to play next.
+            // If this was player 2's turn, then player 1 is going to play next.
+            if (this.turn.Equals(player1))
+                this.SetTurnPlayer2();
+            else
+                this.SetTurnPlayer1();
+
+            // Check if the player is being controlled by the computer,
+            // if that's the case then make a move.
+            this.CheckComputerPlay();
         }
     }
 }
