@@ -48,6 +48,157 @@ namespace Tic_Tac_Toe
             random = new Random();
         }
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "Excersise 2" + Environment.NewLine +
+                Environment.NewLine +
+                "Π16036. Παναγιώτης Ιωαννίδης" + Environment.NewLine +
+                "Π16097. Διονύσης Νίκας" + Environment.NewLine +
+                "Π16112. Αθανάσιος Παραβάντης",
+                "About",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private void CheckComputerPlay()
+        {
+            // Check if the player is controlled by the computer.
+            if (turn.IsComputer)
+            {
+                // If that's the case then select a button and perform a click.
+                Button selected = turn.SelectButton(turn.Equals(player1) ? player2 : player1, buttons);
+
+                // Click the button that was selected.
+                selected.PerformClick();
+            }
+        }
+
+        private void CreateGame(Player player1, Player player2)
+        {
+            // Assuming the users have interacted with the new game form window,
+            // this method will be called when they finish setting up the players.
+
+            // We have our two player objects passed in with all the settings from the new game form.
+            this.player1 = player1;
+            this.player2 = player2;
+
+            // Updated the score labels.
+            labelNamePlayer1.Text = player1.Νame;
+            labelScorePlayer1.Text = "0";
+            labelNamePlayer2.Text = player2.Νame;
+            labelScorePlayer2.Text = "0";
+
+            // The new game button now works as a Restart button when every match ends.
+            newGameButton.Text = "Restart";
+
+            // Everything is ready, start the game.
+            StartGame();
+        }
+
+        private void EndGameDraw()
+        {
+            // Display a message box for the draw.
+            MessageBox.Show("The game ended with a draw!", "Match");
+
+            // Reset the current game, prepare for the next one.
+            ResetGame();
+        }
+
+        private void EndGameWin()
+        {
+            // Display a message box for the winner.
+            MessageBox.Show(turn.ToString() + " won the game!", "Match");
+
+            // Add one to the total wins of the player.
+            turn.AddWin();
+
+            // Update the score label of the winner.
+            if (turn == player1)
+                labelScorePlayer1.Text = turn.Score.ToString();
+            else
+                labelScorePlayer2.Text = turn.Score.ToString();
+
+            // Reset the current game, prepare for the next one.
+            ResetGame();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+
+        private KeyValuePair<int, int> GetCoordinates(Button button)
+        {
+            // Initialize x, y variables.
+            int x = 0, y = 0;
+
+            // Loop through all buttons along the X and Y axis.
+            for (int i = 0; i < X; i++)
+            {
+                for (int j = 0; j < Y; j++)
+                {
+                    // If the buttons are equal then get the x and y coordinates.
+                    if (buttons[i, j].Equals(button))
+                    {
+                        x = i;
+                        y = j;
+                        break;
+                    }
+                }
+            }
+
+            // Return a new key-pair object that will hold the x and y variables.
+            // Basically we're returning two variables.
+            return new KeyValuePair<int, int>(x, y);
+        }
+
+        private void HandleMoves(object sender, EventArgs e)
+        {
+            // Handles all moves for each match when a button is clicked.
+
+            // Find which button was clicked, perform casting.
+            Button button = (Button)sender;
+
+            // Get the X and Y coordinates of the button.
+            KeyValuePair<int, int> coords = GetCoordinates(button);
+            int x = coords.Key;
+            int y = coords.Value;
+
+            // If the clicked button hasn't been used before then proceed.
+            if (button.Text.Length == 0)
+            {
+                // Register the move of the current player.
+                MoveState state = turn.MakeMove(button, x, y);
+
+                // Determine the result of the move.
+                if (state == MoveState.Win)
+                {
+                    // The move formed a set of Xs or Os that resulted to a win.
+                    EndGameWin();
+                }
+                else if (state == MoveState.Draw)
+                {
+                    // The move didn't result to a win and all buttons are clicked.
+                    EndGameDraw();
+                }
+                else
+                {
+                    // The match still has potential and may result to a win or a draw.
+                    // Switch turns and let the other player make his move.
+                    SwitchTurns();
+                }
+            }
+        }
+
+        private bool IsNewGameFormClosed()
+        {
+            // Check if the new game form is null or already closed, then we can open it.
+            return newGameForm == null || newGameForm.IsDisposed;
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             // Loop through all registered buttons and add a new click event handler.
@@ -101,47 +252,20 @@ namespace Tic_Tac_Toe
             newGameForm.Show();
         }
 
-        private bool IsNewGameFormClosed()
+        private void RandomTurn()
         {
-            // Check if the new game form is null or already closed, then we can open it.
-            return newGameForm == null || newGameForm.IsDisposed;
-        }
+            // Generate a random number from 0 to 1, basically true/false.
+            int rand = random.Next(0, 2);
 
-        private void CreateGame(Player player1, Player player2)
-        {
-            // Assuming the users have interacted with the new game form window,
-            // this method will be called when they finish setting up the players.
+            // Choose who is going to play next.
+            if (rand == 0)
+                SetTurnPlayer1();
+            else
+                SetTurnPlayer2();
 
-            // We have our two player objects passed in with all the settings from the new game form.
-            this.player1 = player1;
-            this.player2 = player2;
-
-            // Updated the score labels.
-            labelNamePlayer1.Text = player1.Νame;
-            labelScorePlayer1.Text = "0";
-            labelNamePlayer2.Text = player2.Νame;
-            labelScorePlayer2.Text = "0";
-            
-            // The new game button now works as a Restart button when every match ends.
-            newGameButton.Text = "Restart";
-
-            // Everything is ready, start the game.
-            StartGame();
-        }
-
-        private void StartGame()
-        {
-            // Enable all buttons so they can be clicked.
-            foreach (Button button in buttons)
-            {
-                button.Enabled = true;
-            }
-
-            // The new game button is no longer visible since the match has started.
-            newGameButton.Visible = false;
-
-            // Choose randomly one of the two players for the first turn.
-            RandomTurn();
+            // Check if the player is being controlled by the computer,
+            // if that's the case then make a move.
+            CheckComputerPlay();
         }
 
         private void ResetGame()
@@ -171,75 +295,25 @@ namespace Tic_Tac_Toe
             newGameButton.Focus();
         }
 
-        private void EndGameWin()
+        private void ResetNameLabel1()
         {
-            // Display a message box for the winner.
-            MessageBox.Show(turn.ToString() + " won the game!", "Match");
-
-            // Add one to the total wins of the player.
-            turn.AddWin();
-
-            // Update the score label of the winner.
-            if (turn == player1)
-                labelScorePlayer1.Text = turn.Score.ToString();
-            else
-                labelScorePlayer2.Text = turn.Score.ToString();
-
-            // Reset the current game, prepare for the next one.
-            ResetGame();
+            // Reset the name label of player 1 back to it's original state.
+            labelNamePlayer1.Font = new Font(labelNamePlayer1.Font, FontStyle.Regular);
+            labelNamePlayer1.ForeColor = Color.Black;
         }
 
-        private void EndGameDraw()
+        private void ResetNameLabel2()
         {
-            // Display a message box for the draw.
-            MessageBox.Show("The game ended with a draw!", "Match");
-
-            // Reset the current game, prepare for the next one.
-            ResetGame();
+            // Reset the name label of player 2 back to it's original state.
+            labelNamePlayer2.Font = new Font(labelNamePlayer2.Font, FontStyle.Regular);
+            labelNamePlayer2.ForeColor = Color.Black;
         }
 
-        private void RandomTurn()
+        private void ResetNameLabels()
         {
-            // Generate a random number from 0 to 1, basically true/false.
-            int rand = random.Next(0, 2);
-
-            // Choose who is going to play next.
-            if (rand == 0)
-                SetTurnPlayer1();
-            else
-                SetTurnPlayer2();
-
-            // Check if the player is being controlled by the computer,
-            // if that's the case then make a move.
-            CheckComputerPlay();
-        }
-
-        private void SwitchTurns()
-        {
-            // Choose who is going to play next.
-            // If this was player 1's turn, then player 2 is going to play next.
-            // If this was player 2's turn, then player 1 is going to play next.
-            if (turn.Equals(player1))
-                SetTurnPlayer2();
-            else
-                SetTurnPlayer1();
-
-            // Check if the player is being controlled by the computer,
-            // if that's the case then make a move.
-            CheckComputerPlay();
-        }
-
-        private void CheckComputerPlay()
-        {
-            // Check if the player is controlled by the computer.
-            if (turn.IsComputer)
-            {
-                // If that's the case then select a button and perform a click.
-                Button selected = turn.SelectButton(turn.Equals(player1) ? player2 : player1, buttons);
-
-                // Click the button that was selected.
-                selected.PerformClick();
-            }
+            // Reset all name labels back to their original state.
+            ResetNameLabel1();
+            ResetNameLabel2();
         }
 
         private void SetTurnPlayer1()
@@ -268,106 +342,34 @@ namespace Tic_Tac_Toe
             ResetNameLabel1();
         }
 
-        private void ResetNameLabel1()
+        private void StartGame()
         {
-            // Reset the name label of player 1 back to it's original state.
-            labelNamePlayer1.Font = new Font(labelNamePlayer1.Font, FontStyle.Regular);
-            labelNamePlayer1.ForeColor = Color.Black;
-        }
-
-        private void ResetNameLabel2()
-        {
-            // Reset the name label of player 2 back to it's original state.
-            labelNamePlayer2.Font = new Font(labelNamePlayer2.Font, FontStyle.Regular);
-            labelNamePlayer2.ForeColor = Color.Black;
-        }
-
-        private void ResetNameLabels()
-        {
-            // Reset all name labels back to their original state.
-            ResetNameLabel1();
-            ResetNameLabel2();
-        }
-
-        private void HandleMoves(object sender, EventArgs e)
-        {
-            // Handles all moves for each match when a button is clicked.
-
-            // Find which button was clicked, perform casting.
-            Button button = (Button)sender;
-
-            // Get the X and Y coordinates of the button.
-            KeyValuePair<int, int> coords = GetCoordinates(button);
-            int x = coords.Key;
-            int y = coords.Value;
-
-            // If the clicked button hasn't been used before then proceed.
-            if (button.Text.Length == 0)
+            // Enable all buttons so they can be clicked.
+            foreach (Button button in buttons)
             {
-                // Register the move of the current player.
-                MoveState state = turn.MakeMove(button, x, y);
-
-                // Determine the result of the move.
-                if (state == MoveState.Win)
-                {
-                    // The move formed a set of Xs or Os that resulted to a win.
-                    EndGameWin();
-                }
-                else if (state == MoveState.Draw)
-                {
-                    // The move didn't result to a win and all buttons are clicked.
-                    EndGameDraw();
-                }
-                else
-                {
-                    // The match still has potential and may result to a win or a draw.
-                    // Switch turns and let the other player make his move.
-                    SwitchTurns();
-                }
-            }
-        }
-
-        private KeyValuePair<int, int> GetCoordinates(Button button)
-        {
-            // Initialize x, y variables.
-            int x = 0, y = 0;
-
-            // Loop through all buttons along the X and Y axis.
-            for (int i = 0; i < X; i++)
-            {
-                for (int j = 0; j < Y; j++)
-                {
-                    // If the buttons are equal then get the x and y coordinates.
-                    if (buttons[i, j].Equals(button))
-                    {
-                        x = i;
-                        y = j;
-                        break;
-                    }
-                }
+                button.Enabled = true;
             }
 
-            // Return a new key-pair object that will hold the x and y variables.
-            // Basically we're returning two variables.
-            return new KeyValuePair<int, int>(x, y);
+            // The new game button is no longer visible since the match has started.
+            newGameButton.Visible = false;
+
+            // Choose randomly one of the two players for the first turn.
+            RandomTurn();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SwitchTurns()
         {
-            MessageBox.Show(
-                "Excersise 2" + Environment.NewLine +
-                Environment.NewLine +
-                "Π16036. Παναγιώτης Ιωαννίδης" + Environment.NewLine +
-                "Π16097. Διονύσης Νίκας" + Environment.NewLine +
-                "Π16112. Αθανάσιος Παραβάντης",
-                "About",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
+            // Choose who is going to play next.
+            // If this was player 1's turn, then player 2 is going to play next.
+            // If this was player 2's turn, then player 1 is going to play next.
+            if (turn.Equals(player1))
+                SetTurnPlayer2();
+            else
+                SetTurnPlayer1();
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            // Check if the player is being controlled by the computer,
+            // if that's the case then make a move.
+            CheckComputerPlay();
         }
     }
 }
