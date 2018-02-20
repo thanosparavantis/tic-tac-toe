@@ -147,7 +147,7 @@ namespace Tic_Tac_Toe
                 int y = options[i, 1];
 
                 // Check if the X and Y coordinates are valid and not blocked/used.
-                if (x > 0 && y > 0 && x != MainForm.X && y != MainForm.Y &&
+                if (x >= 0 && y >= 0 && x != MainForm.X && y != MainForm.Y &&
                     !otherPlayer.Moves[x, y] && !this.Moves[x, y])
                 {
                     // Add our option to the list.
