@@ -1,1 +1,2 @@
-# c_sharp_tic_tac_toe
+# Tic-Tac-Toe  
+My take on the tic-tac-toe game implemented in C#.
