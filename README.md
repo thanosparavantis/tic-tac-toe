@@ -1,2 +1,2 @@
 # Tic-Tac-Toe  
-My take on the tic-tac-toe game implemented in C#.
+A window based Tic-Tac-Toe game implementation in C# using Visual Studio.
